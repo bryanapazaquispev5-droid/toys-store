@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product, CATEGORIES, AGE_RANGES } from '@/types/toy';
+import { CustomSelect } from '@/components/CustomSelect';
 import { fetchProducts, saveProduct, removeProduct, uploadToyImage } from '@/lib/supabase';
 import { getCurrency, getStoreName, getWhatsAppNumber } from '@/lib/whatsapp';
 import {
@@ -385,15 +386,14 @@ export default function AdminPage() {
                 <label className="text-xs font-bold text-slate-700 block mb-1.5">
                   Categoría *
                 </label>
-                <select
+                <CustomSelect
+                  variant="sky"
+                  className="w-full"
+                  buttonClassName="w-full py-2.5 px-4 rounded-2xl bg-slate-50 border-slate-200"
                   value={formCategory}
-                  onChange={(e) => setFormCategory(e.target.value as any)}
-                  className="w-full text-xs sm:text-sm px-4 py-2.5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-rose-400 outline-hidden"
-                >
-                  {CATEGORIES.filter((c) => c !== 'Todos').map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
+                  onChange={(val) => setFormCategory(val as any)}
+                  options={CATEGORIES.filter((c) => c !== 'Todos')}
+                />
               </div>
 
               <div>
@@ -429,30 +429,32 @@ export default function AdminPage() {
                 <label className="text-xs font-bold text-slate-700 block mb-1.5">
                   Edad Recomendada
                 </label>
-                <select
+                <CustomSelect
+                  variant="sky"
+                  className="w-full"
+                  buttonClassName="w-full py-2.5 px-4 rounded-2xl bg-slate-50 border-slate-200"
                   value={formAgeRange}
-                  onChange={(e) => setFormAgeRange(e.target.value)}
-                  className="w-full text-xs sm:text-sm px-4 py-2.5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-rose-400 outline-hidden"
-                >
-                  {AGE_RANGES.map((a) => (
-                    <option key={a} value={a}>{a}</option>
-                  ))}
-                </select>
+                  onChange={setFormAgeRange}
+                  options={AGE_RANGES}
+                />
               </div>
 
               <div>
                 <label className="text-xs font-bold text-slate-700 block mb-1.5">
                   Público Objetivo / Género
                 </label>
-                <select
+                <CustomSelect
+                  variant="sky"
+                  className="w-full"
+                  buttonClassName="w-full py-2.5 px-4 rounded-2xl bg-slate-50 border-slate-200"
                   value={formGender}
-                  onChange={(e) => setFormGender(e.target.value as any)}
-                  className="w-full text-xs sm:text-sm px-4 py-2.5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-rose-400 outline-hidden font-semibold text-slate-800"
-                >
-                  <option value="unisex">🌟 Para Todos / Unisex</option>
-                  <option value="niños">👦 Para Niños</option>
-                  <option value="niñas">👧 Para Niñas</option>
-                </select>
+                  onChange={(val) => setFormGender(val as any)}
+                  options={[
+                    { value: 'unisex', label: 'Para Todos / Unisex', icon: '🌟' },
+                    { value: 'niños', label: 'Para Niños', icon: '👦' },
+                    { value: 'niñas', label: 'Para Niñas', icon: '👧' },
+                  ]}
+                />
               </div>
 
               <div>

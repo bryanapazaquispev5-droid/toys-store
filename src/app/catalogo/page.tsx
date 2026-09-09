@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { ProductCard } from '@/components/ProductCard';
 import { Footer } from '@/components/Footer';
+import { CustomSelect } from '@/components/CustomSelect';
 import { Product, CATEGORIES, Category, AGE_RANGES } from '@/types/toy';
 import { fetchProducts } from '@/lib/supabase';
 import { generateSingleProductWhatsAppUrl, getCurrency } from '@/lib/whatsapp';
@@ -139,39 +140,17 @@ function CatalogContent() {
       {/* Header section in rich pastel sky */}
       <div className="bg-sky-100/90 border-b border-sky-200 py-8 2xl:py-10">
         <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 lg:gap-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
-                <Sparkles className="w-3.5 h-3.5 text-sky-700" />
-                <span>Catálogo Completo</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-sky-950 tracking-tight">
-                Catálogo de Juguetes
-              </h1>
-              <p className="text-xs sm:text-sm 2xl:text-base text-sky-800 mt-1 font-medium">
-                Elige juguetes para niños, niñas o para todos, filtra por edad y pide directo a WhatsApp.
-              </p>
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
+              <Sparkles className="w-3.5 h-3.5 text-sky-700" />
+              <span>Catálogo Completo</span>
             </div>
-
-            {/* Live Search Input Box */}
-            <div className="w-full md:w-80 lg:w-96 xl:w-1/3 min-[2000px]:w-1/4 relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-600" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar por nombre, tipo o edad..."
-                className="w-full pl-10 pr-9 py-2.5 2xl:py-3 text-xs sm:text-sm font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-colors text-slate-900 placeholder-sky-400 shadow-2xs"
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-sky-950 tracking-tight">
+              Catálogo de Juguetes
+            </h1>
+            <p className="text-xs sm:text-sm 2xl:text-base text-sky-800 mt-1 font-medium">
+              Elige juguetes para niños, niñas o para todos, filtra por edad y pide directo a WhatsApp.
+            </p>
           </div>
 
           {/* PROMINENT GENDER SEPARATOR (Niños / Niñas / Todos) */}
@@ -244,31 +223,46 @@ function CatalogContent() {
         </div>
       </div>
 
-      {/* Control Bar: Filters in rich pastel amber */}
+      {/* Main Catalog View */}
       <main className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 py-6 sm:py-8 w-full flex-1">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-amber-100/70 p-3.5 rounded-lg border-2 border-amber-300 shadow-2xs">
+        
+        {/* PROMINENT REAL-TIME SEARCH BAR - Directly above the filter controls */}
+        <div className="mb-4 relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sky-600 pointer-events-none" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar por nombre, tipo o edad en tiempo real..."
+            className="w-full pl-12 pr-12 py-3.5 sm:py-4 text-xs sm:text-sm font-bold bg-white rounded-2xl border-2 border-sky-300 focus:border-sky-500 outline-hidden transition-all text-slate-900 placeholder-sky-400 shadow-2xs focus:shadow-md"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-sky-100 hover:bg-sky-200 text-sky-800 transition-colors cursor-pointer"
+              title="Borrar búsqueda"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* Control Bar: Filters in rich pastel amber */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-amber-100/70 p-3.5 rounded-2xl border-2 border-amber-300 shadow-2xs">
           
           <div className="flex items-center gap-3 flex-wrap">
-            {/* Age Filter */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black text-amber-950 flex items-center gap-1">
-                <Filter className="w-3.5 h-3.5 text-amber-700" /> Edad:
-              </span>
-              <select
-                value={selectedAge}
-                onChange={(e) => setSelectedAge(e.target.value)}
-                className="text-xs font-bold bg-white border border-amber-300 rounded-md px-2.5 py-1.5 text-amber-950 outline-hidden focus:border-amber-500 transition-colors cursor-pointer"
-              >
-                {AGE_RANGES.map((age) => (
-                  <option key={age} value={age}>
-                    {age}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Custom Styled Age Filter */}
+            <CustomSelect
+              variant="amber"
+              icon={<Filter className="w-3.5 h-3.5" />}
+              labelPrefix="Edad:"
+              value={selectedAge}
+              onChange={setSelectedAge}
+              options={AGE_RANGES}
+            />
 
             {/* In stock toggle */}
-            <label className="flex items-center gap-2 text-xs font-black text-amber-950 bg-white border border-amber-300 px-3 py-1.5 rounded-md cursor-pointer hover:bg-amber-50 transition-colors">
+            <label className="flex items-center gap-2 text-xs font-black text-amber-950 bg-white border-2 border-amber-300 hover:border-amber-400 px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-amber-50 transition-colors shadow-2xs">
               <input
                 type="checkbox"
                 checked={onlyInStock}
@@ -281,7 +275,7 @@ function CatalogContent() {
             {activeFiltersCount > 0 && (
               <button
                 onClick={resetAllFilters}
-                className="text-xs font-black text-rose-600 hover:text-rose-700 underline px-1 py-1"
+                className="text-xs font-black text-rose-600 hover:text-rose-700 underline px-1 py-1 cursor-pointer"
               >
                 Limpiar ({activeFiltersCount})
               </button>
@@ -289,29 +283,27 @@ function CatalogContent() {
           </div>
 
           <div className="flex items-center gap-2 justify-between sm:justify-end">
-            {/* Sorting */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black text-amber-950 flex items-center gap-1">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-700" /> Ordenar:
-              </span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="text-xs font-bold bg-white border border-amber-300 rounded-md px-2.5 py-1.5 text-amber-950 outline-hidden focus:border-amber-500 transition-colors cursor-pointer"
-              >
-                <option value="featured">Destacados</option>
-                <option value="price-asc">Precio: Menor a Mayor</option>
-                <option value="price-desc">Precio: Mayor a Menor</option>
-                <option value="name">Nombre (A-Z)</option>
-              </select>
-            </div>
+            {/* Custom Styled Sorting Filter */}
+            <CustomSelect
+              variant="amber"
+              icon={<SlidersHorizontal className="w-3.5 h-3.5" />}
+              labelPrefix="Ordenar:"
+              value={sortBy}
+              onChange={(val) => setSortBy(val as any)}
+              options={[
+                { value: 'featured', label: 'Destacados', icon: '⭐' },
+                { value: 'price-asc', label: 'Precio: Menor a Mayor', icon: '💵' },
+                { value: 'price-desc', label: 'Precio: Mayor a Menor', icon: '💎' },
+                { value: 'name', label: 'Nombre (A-Z)', icon: '🔤' },
+              ]}
+            />
 
             {/* View Mode Toggle */}
-            <div className="flex items-center bg-white p-0.5 rounded-md border border-amber-300">
+            <div className="flex items-center bg-white p-0.5 rounded-full border-2 border-amber-300">
               <button
                 onClick={() => setViewMode('grid')}
                 title="Vista Cuadrícula"
-                className={`p-1.5 rounded-sm transition-colors cursor-pointer ${
+                className={`p-1.5 rounded-full transition-colors cursor-pointer ${
                   viewMode === 'grid' ? 'bg-amber-400 text-amber-950 font-bold' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -320,7 +312,7 @@ function CatalogContent() {
               <button
                 onClick={() => setViewMode('list')}
                 title="Vista Lista"
-                className={`p-1.5 rounded-sm transition-colors cursor-pointer ${
+                className={`p-1.5 rounded-full transition-colors cursor-pointer ${
                   viewMode === 'list' ? 'bg-amber-400 text-amber-950 font-bold' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -332,7 +324,7 @@ function CatalogContent() {
             <button
               onClick={loadData}
               title="Actualizar catálogo"
-              className="p-1.5 bg-white hover:bg-amber-50 text-amber-950 rounded-md border border-amber-300 transition-colors cursor-pointer"
+              className="p-1.5 bg-white hover:bg-amber-50 text-amber-950 rounded-full border-2 border-amber-300 transition-colors cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-amber-700' : ''}`} />
             </button>
