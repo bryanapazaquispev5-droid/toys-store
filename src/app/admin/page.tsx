@@ -38,6 +38,7 @@ export default function AdminPage() {
   const [formOriginalPrice, setFormOriginalPrice] = useState('');
   const [formCategory, setFormCategory] = useState(CATEGORIES[1]);
   const [formAgeRange, setFormAgeRange] = useState(AGE_RANGES[0]);
+  const [formGender, setFormGender] = useState<'unisex' | 'niños' | 'niñas'>('unisex');
   const [formDescription, setFormDescription] = useState('');
   const [formImageUrl, setFormImageUrl] = useState('');
   const [formInStock, setFormInStock] = useState(true);
@@ -100,6 +101,7 @@ export default function AdminPage() {
     setFormOriginalPrice('');
     setFormCategory(CATEGORIES[1]);
     setFormAgeRange(AGE_RANGES[0]);
+    setFormGender('unisex');
     setFormDescription('');
     setFormImageUrl('');
     setFormInStock(true);
@@ -115,6 +117,7 @@ export default function AdminPage() {
     setFormOriginalPrice(prod.original_price ? prod.original_price.toString() : '');
     setFormCategory(prod.category as any);
     setFormAgeRange(prod.age_range);
+    setFormGender(prod.gender || 'unisex');
     setFormDescription(prod.description || '');
     setFormImageUrl(prod.image_url || '');
     setFormInStock(prod.in_stock);
@@ -160,6 +163,7 @@ export default function AdminPage() {
       original_price: formOriginalPrice ? parseFloat(formOriginalPrice) : null,
       category: formCategory,
       age_range: formAgeRange,
+      gender: formGender,
       description: formDescription.trim(),
       image_url: formImageUrl.trim(),
       in_stock: formInStock,
@@ -433,6 +437,21 @@ export default function AdminPage() {
                   {AGE_RANGES.map((a) => (
                     <option key={a} value={a}>{a}</option>
                   ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                  Público Objetivo / Género
+                </label>
+                <select
+                  value={formGender}
+                  onChange={(e) => setFormGender(e.target.value as any)}
+                  className="w-full text-xs sm:text-sm px-4 py-2.5 bg-slate-50 rounded-2xl border border-slate-200 focus:bg-white focus:border-rose-400 outline-hidden font-semibold text-slate-800"
+                >
+                  <option value="unisex">🌟 Para Todos / Unisex</option>
+                  <option value="niños">👦 Para Niños</option>
+                  <option value="niñas">👧 Para Niñas</option>
                 </select>
               </div>
 

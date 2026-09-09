@@ -7,6 +7,7 @@ export interface Product {
   original_price?: number | null;
   category: string;
   age_range: string;
+  gender?: 'niños' | 'niñas' | 'unisex';
   image_url: string;
   additional_images?: string[];
   in_stock: boolean;

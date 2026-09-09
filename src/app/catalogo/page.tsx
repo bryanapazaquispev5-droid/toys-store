@@ -24,13 +24,19 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+type GenderFilter = 'todos' | 'niños' | 'niñas';
+
 function CatalogContent() {
   const searchParams = useSearchParams();
   const initialCat = searchParams.get('categoria') as Category | null;
+  const initialGender = searchParams.get('genero') as GenderFilter | null;
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [selectedGender, setSelectedGender] = useState<GenderFilter>(
+    initialGender && ['todos', 'niños', 'niñas'].includes(initialGender) ? initialGender : 'todos'
+  );
   const [selectedCategory, setSelectedCategory] = useState<Category>(
     initialCat && CATEGORIES.includes(initialCat) ? initialCat : 'Todos'
   );
@@ -59,10 +65,17 @@ function CatalogContent() {
     }
   }, [initialCat]);
 
-  // Real-time live filtering
+  // Real-time live filtering including gender, category, search, and age
   const filteredProducts = useMemo(() => {
     return products
       .filter((product) => {
+        // Gender filter: if niños -> include 'niños' & 'unisex'; if niñas -> include 'niñas' & 'unisex'
+        if (selectedGender === 'niños') {
+          if (product.gender === 'niñas') return false;
+        } else if (selectedGender === 'niñas') {
+          if (product.gender === 'niños') return false;
+        }
+
         if (search.trim()) {
           const q = search.toLowerCase();
           const matchName = product.name.toLowerCase().includes(q);
@@ -101,9 +114,10 @@ function CatalogContent() {
         }
         return 0;
       });
-  }, [products, search, selectedCategory, selectedAge, onlyInStock, sortBy]);
+  }, [products, search, selectedGender, selectedCategory, selectedAge, onlyInStock, sortBy]);
 
   const activeFiltersCount =
+    (selectedGender !== 'todos' ? 1 : 0) +
     (selectedCategory !== 'Todos' ? 1 : 0) +
     (selectedAge !== 'Todas las edades' ? 1 : 0) +
     (onlyInStock ? 1 : 0) +
@@ -111,6 +125,7 @@ function CatalogContent() {
 
   const resetAllFilters = () => {
     setSearch('');
+    setSelectedGender('todos');
     setSelectedCategory('Todos');
     setSelectedAge('Todas las edades');
     setOnlyInStock(false);
@@ -134,7 +149,7 @@ function CatalogContent() {
                 Catálogo de Juguetes
               </h1>
               <p className="text-xs sm:text-sm text-sky-800 mt-1 font-medium">
-                Filtra por categorías o edades y haz clic en cualquier juguete para ver sus fotos y detalles.
+                Elige juguetes para niños, niñas o para todos, filtra por edad y pide directo a WhatsApp.
               </p>
             </div>
 
@@ -156,6 +171,54 @@ function CatalogContent() {
                   <X className="w-3.5 h-3.5" />
                 </button>
               )}
+            </div>
+          </div>
+
+          {/* PROMINENT GENDER SEPARATOR (Niños / Niñas / Todos) */}
+          <div className="mt-6 pt-5 border-t border-sky-200/80">
+            <p className="text-xs font-black text-sky-900 mb-2 uppercase tracking-wide">
+              ¿Para quién es el juguete?
+            </p>
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-xl">
+              
+              {/* Boys Button */}
+              <button
+                onClick={() => setSelectedGender('niños')}
+                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                  selectedGender === 'niños'
+                    ? 'bg-sky-500 text-white border-sky-600 shadow-md scale-102'
+                    : 'bg-white hover:bg-sky-50 text-sky-900 border-sky-200 shadow-2xs'
+                }`}
+              >
+                <span className="text-base sm:text-lg">👦</span>
+                <span>Para Niños</span>
+              </button>
+
+              {/* Girls Button */}
+              <button
+                onClick={() => setSelectedGender('niñas')}
+                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                  selectedGender === 'niñas'
+                    ? 'bg-pink-500 text-white border-pink-600 shadow-md scale-102'
+                    : 'bg-white hover:bg-pink-50 text-pink-900 border-pink-200 shadow-2xs'
+                }`}
+              >
+                <span className="text-base sm:text-lg">👧</span>
+                <span>Para Niñas</span>
+              </button>
+
+              {/* All / Unisex Button */}
+              <button
+                onClick={() => setSelectedGender('todos')}
+                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                  selectedGender === 'todos'
+                    ? 'bg-amber-400 text-amber-950 border-amber-500 shadow-md scale-102'
+                    : 'bg-white hover:bg-amber-50 text-amber-950 border-amber-200 shadow-2xs'
+                }`}
+              >
+                <span className="text-base sm:text-lg">🌟</span>
+                <span>Para Todos</span>
+              </button>
             </div>
           </div>
 
@@ -280,6 +343,9 @@ function CatalogContent() {
         <div className="mt-4 mb-5 flex items-center justify-between">
           <p className="text-xs sm:text-sm text-slate-700 font-bold">
             Mostrando <span className="text-sky-700 font-black">{filteredProducts.length}</span> juguetes encontrados
+            {selectedGender !== 'todos' && (
+              <span className="text-pink-600 font-black"> ({selectedGender === 'niños' ? 'Para Niños 👦' : 'Para Niñas 👧'})</span>
+            )}
             {search && <span> para &ldquo;{search}&rdquo;</span>}
           </p>
         </div>
@@ -316,7 +382,7 @@ function CatalogContent() {
             ))}
           </div>
         ) : (
-          /* List Mode (Navigates to /producto/[id] on click) */
+          /* List Mode */
           <div className="flex flex-col gap-3">
             {filteredProducts.map((product) => {
               const handleWhatsAppBuy = (e: React.MouseEvent) => {
@@ -353,6 +419,11 @@ function CatalogContent() {
                       <span className="text-[11px] font-bold text-sky-900 bg-sky-200 border border-sky-300 px-2.5 py-0.5 rounded-md">
                         {product.age_range}
                       </span>
+                      {product.gender && product.gender !== 'unisex' && (
+                        <span className="text-[11px] font-bold text-indigo-900 bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded-md">
+                          {product.gender === 'niños' ? '👦 Para Niños' : '👧 Para Niñas'}
+                        </span>
+                      )}
                       {!product.in_stock ? (
                         <span className="text-[10px] font-bold text-rose-600 bg-rose-100 px-2 py-0.5 rounded-md flex items-center gap-1 border border-rose-200">
                           <AlertCircle className="w-3 h-3" /> Agotado
