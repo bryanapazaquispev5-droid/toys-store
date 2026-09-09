@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShoppingBag, MessageCircle, Shield, Search, Menu, X, Package, Home as HomeIcon, Sparkles } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Search, Menu, X, Shield } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { getWhatsAppNumber, getStoreName } from '@/lib/whatsapp';
 
@@ -20,185 +20,167 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleWhatsAppGeneral = () => {
-    const text = encodeURIComponent(`¡Hola ${storeName}! Tengo una consulta sobre los productos de la tienda.`);
+    const text = encodeURIComponent(`¡Hola ${storeName}! Quisiera hacer una consulta sobre los productos.`);
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   };
 
-  const navLinks = [
-    { label: 'Inicio', href: '/', icon: HomeIcon },
-    { label: 'Catálogo', href: '/catalogo', icon: Package },
-    { label: 'Destacados', href: '/#destacados', icon: Sparkles },
-  ];
-
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-2xs">
-      {/* Clean top notice bar */}
-      <div className="bg-slate-900 text-white text-xs font-semibold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2">
-        <span>Envíos rápidos a domicilio • Pedidos directos por WhatsApp</span>
-      </div>
-
-      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-rose-500 flex items-center justify-center text-white shadow-xs group-hover:bg-rose-600 transition-colors">
-            <span className="text-xl">🧸</span>
-          </div>
-          <div>
-            <span className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1">
-              {storeName.split(' ')[0]} <span className="text-rose-600 font-extrabold">{storeName.split(' ').slice(1).join(' ') || 'Toys'}</span>
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+        
+        {/* Left: Brand */}
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center gap-2 group">
+            <span className="text-lg font-black tracking-tight text-slate-900">
+              {storeName.toUpperCase()}
             </span>
-            <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
-              Tienda de juguetes y regalos
-            </p>
-          </div>
-        </Link>
+            <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+          </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
-          {navLinks.map((item) => {
-            const isActive = pathname === item.href;
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
-                  isActive
-                    ? 'bg-white text-rose-600 shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
+          {/* Desktop Clean Nav */}
+          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold tracking-wide text-slate-600 uppercase">
+            <Link
+              href="/"
+              className={`transition-colors hover:text-slate-900 ${
+                pathname === '/' ? 'text-slate-900 font-bold' : ''
+              }`}
+            >
+              Inicio
+            </Link>
+            <Link
+              href="/catalogo"
+              className={`transition-colors hover:text-slate-900 ${
+                pathname === '/catalogo' ? 'text-slate-900 font-bold' : ''
+              }`}
+            >
+              Catálogo
+            </Link>
+          </nav>
+        </div>
 
-        {/* Search bar on desktop if supported */}
+        {/* Center: Search input if in catalog, or quick link */}
         {onSearchChange ? (
-          <div className="hidden md:flex flex-1 max-w-xs xl:max-w-sm mx-2 relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <div className="hidden lg:flex flex-1 max-w-xs relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
             <input
               type="text"
-              placeholder="Buscar juguetes..."
+              placeholder="Buscar..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-slate-100 hover:bg-slate-50 focus:bg-white rounded-xl border border-slate-200 focus:border-rose-500 outline-hidden transition-colors text-slate-800 placeholder-slate-400"
+              className="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-50 hover:bg-slate-100/70 focus:bg-white rounded-full border border-slate-200 focus:border-slate-400 outline-hidden transition-all text-slate-900 placeholder-slate-400"
             />
           </div>
         ) : (
-          <div className="hidden md:flex">
+          <div className="hidden lg:flex">
             <Link
               href="/catalogo"
-              className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 rounded-xl border border-slate-200 transition-colors"
+              className="text-xs text-slate-400 hover:text-slate-700 flex items-center gap-2 transition-colors py-1 px-3 rounded-full hover:bg-slate-50"
             >
-              <Search className="w-3.5 h-3.5 text-slate-500" />
-              <span>Explorar catálogo...</span>
+              <Search className="w-3.5 h-3.5" />
+              <span>Buscar en el catálogo...</span>
             </Link>
           </div>
         )}
 
-        {/* Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="/admin"
-            title="Panel de Administración"
-            className="p-2 sm:px-3 sm:py-2 text-xs font-semibold text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors flex items-center gap-1.5 border border-transparent hover:border-indigo-100"
-          >
-            <Shield className="w-4 h-4 text-indigo-500" />
-            <span className="hidden sm:inline">Admin</span>
-          </Link>
-
+        {/* Right: Actions */}
+        <div className="flex items-center gap-4 sm:gap-5">
+          {/* WhatsApp Direct */}
           <button
             onClick={handleWhatsAppGeneral}
-            title="Escribir por WhatsApp"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer"
+            className="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-700 hover:text-emerald-600 transition-colors cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+            <MessageCircle className="w-4 h-4 text-emerald-600" />
             <span>WhatsApp</span>
           </button>
 
-          {/* Cart Button */}
+          {/* Admin link */}
+          <Link
+            href="/admin"
+            title="Administración"
+            className="text-slate-400 hover:text-slate-700 transition-colors p-1"
+          >
+            <Shield className="w-4 h-4" />
+          </Link>
+
+          {/* Cart Trigger */}
           <button
             onClick={openCart}
-            className="relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
+            className="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs"
           >
-            <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:inline">Mi Pedido</span>
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Bolsa</span>
             {totalItems > 0 && (
-              <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-extrabold text-rose-600 bg-white rounded-full shadow-2xs">
+              <span className="w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
                 {totalItems}
               </span>
             )}
           </button>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 transition-colors"
-            aria-label="Abrir menú"
+            className="md:hidden p-1.5 text-slate-700 hover:text-slate-900"
+            aria-label="Menú"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile search bar if supported */}
+      {/* Mobile search bar if on catalog */}
       {onSearchChange && (
-        <div className="md:hidden px-4 pb-3">
+        <div className="lg:hidden px-4 pb-3">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
             <input
               type="text"
-              placeholder="Buscar juguetes..."
+              placeholder="Buscar en el catálogo..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 focus:bg-white rounded-xl border border-slate-200 focus:border-rose-500 outline-hidden transition-colors text-slate-800"
+              className="w-full pl-8 pr-3 py-2 text-xs bg-slate-50 focus:bg-white rounded-xl border border-slate-200 outline-hidden text-slate-900"
             />
           </div>
         </div>
       )}
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-2 shadow-md animate-in slide-in-from-top-1">
-          {navLinks.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                  isActive ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                <Icon className="w-4 h-4 text-rose-500" />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
+        <div className="md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 shadow-sm animate-in slide-in-from-top-1">
+          <nav className="flex flex-col space-y-3 text-sm font-semibold text-slate-800 uppercase tracking-wide">
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`py-1 ${pathname === '/' ? 'text-rose-600' : ''}`}
+            >
+              Inicio
+            </Link>
+            <Link
+              href="/catalogo"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`py-1 ${pathname === '/catalogo' ? 'text-rose-600' : ''}`}
+            >
+              Catálogo
+            </Link>
+          </nav>
 
-          <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 handleWhatsAppGeneral();
               }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200"
+              className="w-full py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-700 text-xs font-semibold flex items-center justify-center gap-2 border border-emerald-100"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+              <MessageCircle className="w-4 h-4 text-emerald-600" />
               <span>Contactar por WhatsApp</span>
             </button>
+
             <Link
               href="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200"
+              className="w-full py-2 px-4 rounded-xl text-slate-500 text-xs text-center hover:bg-slate-50"
             >
-              <Shield className="w-4 h-4 text-indigo-500" />
-              <span>Panel de Administración</span>
+              Panel de Administración
             </Link>
           </div>
         </div>
