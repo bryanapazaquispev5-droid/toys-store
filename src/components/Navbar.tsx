@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ShoppingBag, MessageCircle, Search, Menu, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { getWhatsAppNumber, getStoreName } from '@/lib/whatsapp';
@@ -12,30 +12,7 @@ export function Navbar() {
   const phone = getWhatsAppNumber();
   const storeName = getStoreName();
   const pathname = usePathname();
-  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Secret owner shortcut: 5 rapid clicks on logo within 3s redirects to private panel
-  const clickCountRef = useRef(0);
-  const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    clickCountRef.current += 1;
-
-    if (clickTimerRef.current) {
-      clearTimeout(clickTimerRef.current);
-    }
-
-    if (clickCountRef.current >= 5) {
-      clickCountRef.current = 0;
-      router.push('/panel-privado-98xk');
-      return;
-    }
-
-    clickTimerRef.current = setTimeout(() => {
-      clickCountRef.current = 0;
-    }, 3000);
-  };
 
   const handleWhatsAppGeneral = () => {
     const text = encodeURIComponent(`¡Hola ${storeName}! Quisiera consultar por los juguetes.`);
@@ -48,7 +25,7 @@ export function Navbar() {
         
         {/* Left: Brand & Nav Links */}
         <div className="flex items-center gap-6 sm:gap-8">
-          <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 select-none">
+          <Link href="/" className="flex items-center gap-2">
             <span className="text-lg font-black tracking-tight text-sky-950">
               {storeName}
             </span>
