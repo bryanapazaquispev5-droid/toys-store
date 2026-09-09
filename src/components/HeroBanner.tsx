@@ -27,7 +27,7 @@ export function HeroBanner() {
           {/* Left Column: Glassy Card with Headline & Action */}
           <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 text-center lg:text-left space-y-5 2xl:space-y-7 bg-white/85 backdrop-blur-md p-6 sm:p-8 2xl:p-10 rounded-3xl border border-white/90 shadow-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-200 border border-pink-300 text-pink-900 text-xs font-bold shadow-2xs">
-              <span>Juguetería Mágica • Colección 2026</span>
+              <span>Juguetería Mágica - Colección 2026</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl 2xl:text-6xl font-black text-slate-900 tracking-tight leading-tight">
@@ -87,7 +87,6 @@ export function HeroBanner() {
 
               {/* Pastel stickers */}
               <div className="absolute top-4 left-4 bg-pink-100 px-3 py-1.5 rounded-xl shadow-md border border-pink-300 flex items-center gap-2">
-                <span className="text-pink-600 font-bold text-sm">⭐</span>
                 <div>
                   <p className="text-[10px] text-pink-800 font-black uppercase">Favoritos</p>
                   <p className="text-xs font-bold text-pink-950">Todas las Edades</p>

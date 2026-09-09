@@ -11,10 +11,8 @@ import { Product } from '@/types/toy';
 import { fetchProducts } from '@/lib/supabase';
 import { getWhatsAppNumber } from '@/lib/whatsapp';
 import {
-  Flame,
   ArrowRight,
   MessageCircle,
-  Gift,
   PackageCheck
 } from 'lucide-react';
 
@@ -52,7 +50,6 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-200 text-pink-900 text-xs font-bold mb-1 border border-pink-300">
-                <Flame className="w-3.5 h-3.5 text-pink-700" />
                 <span>Más Populares</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
@@ -111,7 +108,6 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center lg:text-left max-w-3xl">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-200 text-emerald-950 text-xs font-bold border border-emerald-300">
-                <Gift className="w-3.5 h-3.5 text-emerald-800" />
                 <span>Asesoría Personalizada</span>
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight">

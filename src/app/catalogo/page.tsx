@@ -203,7 +203,7 @@ function CatalogContent() {
                     : 'bg-white hover:bg-amber-50 text-amber-950 border-amber-200 shadow-2xs'
                 }`}
               >
-                <span className="text-base sm:text-xl">🌟</span>
+                <span className="text-base sm:text-xl">🧸</span>
                 <span>Para Todos</span>
               </button>
             </div>
@@ -278,7 +278,7 @@ function CatalogContent() {
               value={sortBy}
               onChange={(val) => setSortBy(val as any)}
               options={[
-                { value: 'featured', label: 'Destacados', icon: '⭐' },
+                { value: 'featured', label: 'Destacados', icon: '🎯' },
                 { value: 'price-asc', label: 'Precio: Menor a Mayor', icon: '💵' },
                 { value: 'price-desc', label: 'Precio: Mayor a Menor', icon: '💎' },
                 { value: 'name', label: 'Nombre (A-Z)', icon: '🔤' },
