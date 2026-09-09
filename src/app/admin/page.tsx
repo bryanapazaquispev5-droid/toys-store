@@ -47,7 +47,8 @@ export default function AdminPage() {
   const [formBadge, setFormBadge] = useState('');
   const [formMessage, setFormMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
-  const expectedPin = process.env.NEXT_PUBLIC_ADMIN_PIN || 'Jugueteria#98xK$2026!SecuredAdmin';
+  const MASTER_ADMIN_PASSWORD = 'Jugueteria#98xK$2026!SecuredAdmin';
+  const expectedPin = process.env.NEXT_PUBLIC_ADMIN_PIN || MASTER_ADMIN_PASSWORD;
   const currency = getCurrency();
 
   useEffect(() => {
@@ -59,13 +60,8 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const validPins = [
-      expectedPin.trim(),
-      'Jugueteria#98xK$2026!SecuredAdmin',
-      'AdminMagic2026!',
-      '1234',
-    ];
-    if (validPins.includes(pinInput.trim())) {
+    // Strict verification: only the exact difficult master password
+    if (pinInput.trim() === expectedPin.trim() || pinInput.trim() === MASTER_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_authenticated', 'true');
       setPinError(false);
