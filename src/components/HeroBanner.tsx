@@ -50,7 +50,7 @@ export function HeroBanner() {
               </Link>
 
               <a
-                href={`https://wa.me/${phone}?text=${encodeURIComponent('¡Hola! Me gustaría consultar por los juguetes disponibles 🧸')}`}
+                href={`/mensaje-enviado?text=${encodeURIComponent('¡Hola! Me gustaría consultar por los juguetes disponibles 🧸')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"

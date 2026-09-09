@@ -9,8 +9,8 @@ export function WhatsAppFloating() {
   const storeName = getStoreName();
 
   const handleOpenWhatsApp = () => {
-    const text = encodeURIComponent(`Hola ${storeName}! 👋 Quisiera hacer una consulta.`);
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    const text = encodeURIComponent(`¡Hola ${storeName}! 👋 Quisiera hacer una consulta.`);
+    window.open(`/mensaje-enviado?text=${text}`, '_blank');
   };
 
   return (

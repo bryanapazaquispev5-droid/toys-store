@@ -124,7 +124,7 @@ export default function Home() {
             </div>
 
             <a
-              href={`https://wa.me/${phone}?text=${encodeURIComponent('¡Hola! Quisiera que me asesoren para elegir un regalo según la edad 🧸')}`}
+              href={`/mensaje-enviado?text=${encodeURIComponent('¡Hola! Quisiera que me asesoren para elegir un regalo según la edad 🧸')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-xs transition-colors flex items-center gap-2.5 shrink-0 cursor-pointer"

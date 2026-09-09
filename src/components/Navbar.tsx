@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShoppingBag, MessageCircle, Search, Menu, X, Shield } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Search, Menu, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { getWhatsAppNumber, getStoreName } from '@/lib/whatsapp';
 
@@ -16,7 +16,7 @@ export function Navbar() {
 
   const handleWhatsAppGeneral = () => {
     const text = encodeURIComponent(`¡Hola ${storeName}! Quisiera consultar por los juguetes.`);
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    window.open(`/mensaje-enviado?text=${text}`, '_blank');
   };
 
   return (
@@ -66,15 +66,6 @@ export function Navbar() {
             <MessageCircle className="w-4 h-4 text-emerald-700 fill-emerald-700" />
             <span>WhatsApp</span>
           </button>
-
-          {/* Admin link */}
-          <Link
-            href="/admin"
-            title="Administración"
-            className="p-1.5 text-sky-700 hover:text-sky-950 rounded-full hover:bg-sky-200 transition-colors"
-          >
-            <Shield className="w-4 h-4" />
-          </Link>
 
           {/* Cart Trigger Button in Pastel Pink */}
           <button
@@ -136,14 +127,6 @@ export function Navbar() {
               <MessageCircle className="w-4 h-4 text-emerald-700 fill-emerald-700" />
               <span>WhatsApp de la Tienda</span>
             </button>
-
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-2 px-4 rounded-full text-sky-800 text-xs text-center bg-sky-200/80 hover:bg-sky-200 font-semibold"
-            >
-              Panel de Administración
-            </Link>
           </div>
         </div>
       )}

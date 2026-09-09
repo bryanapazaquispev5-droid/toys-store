@@ -30,7 +30,7 @@ Me interesa comprar el siguiente juguete:
 
 VTaxa de disponibilidad y cómo coordinamos el envío? 🙂*`;
 
-  return 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
+  return '/mensaje-enviado?text=' + encodeURIComponent(message);
 }
 
 export function generateCartWhatsAppUrl(
@@ -72,5 +72,5 @@ ${itemsList}
 
   message += '\n\n¿Me confirman la disponibilidad y los métodos de pago? ¡Gracias! 🎉';
 
-  return 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
+  return '/mensaje-enviado?text=' + encodeURIComponent(message);
 }

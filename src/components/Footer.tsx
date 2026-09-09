@@ -74,10 +74,6 @@ export function Footer() {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} {storeName}. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="hover:text-slate-300 transition-colors">
-              Panel Administrativo
-            </Link>
-            <span>•</span>
             <span className="flex items-center gap-1">
               Hecho con <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> para los más pequeños
             </span>
