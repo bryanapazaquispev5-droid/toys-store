@@ -24,6 +24,24 @@ export async function fetchProducts(): Promise<Product[]> {
   }
 }
 
+export async function fetchProductById(id: string): Promise<Product | null> {
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !data) {
+      return INITIAL_PRODUCTS.find(p => p.id === id) || null;
+    }
+
+    return data as Product;
+  } catch {
+    return INITIAL_PRODUCTS.find(p => p.id === id) || null;
+  }
+}
+
 export async function fetchProductBySlug(slug: string): Promise<Product | null> {
   try {
     const { data, error } = await supabase
