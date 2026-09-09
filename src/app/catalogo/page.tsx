@@ -20,7 +20,6 @@ import {
   MessageCircle,
   ShoppingBag,
   AlertCircle,
-  Sparkles,
   Shapes,
   X
 } from 'lucide-react';
@@ -152,7 +151,6 @@ function CatalogContent() {
         <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
-              <Sparkles className="w-3.5 h-3.5 text-sky-700" />
               <span>Catálogo Completo</span>
             </div>
             <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-sky-950 tracking-tight">

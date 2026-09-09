@@ -18,7 +18,6 @@ import {
   AlertCircle,
   Truck,
   ShieldCheck,
-  Sparkles,
   Flame
 } from 'lucide-react';
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Heart, Brain, Gamepad2, Car, Baby, Shapes } from 'lucide-react';
+import { ArrowRight, Heart, Brain, Gamepad2, Car, Baby, Shapes } from 'lucide-react';
 
 const CATEGORY_CARDS = [
   {
@@ -62,7 +62,6 @@ export function CategoryShowcase() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-900 font-bold text-xs mb-1">
-              <Sparkles className="w-3.5 h-3.5 text-sky-700" />
               <span>Categorías</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">

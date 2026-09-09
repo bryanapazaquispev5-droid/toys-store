@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Truck, Clock, MessageCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, Clock, MessageCircle } from 'lucide-react';
 import { getWhatsAppNumber } from '@/lib/whatsapp';
 
 export function HeroBanner() {
@@ -27,7 +27,6 @@ export function HeroBanner() {
           {/* Left Column: Glassy Card with Headline & Action */}
           <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 text-center lg:text-left space-y-5 2xl:space-y-7 bg-white/85 backdrop-blur-md p-6 sm:p-8 2xl:p-10 rounded-3xl border border-white/90 shadow-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-200 border border-pink-300 text-pink-900 text-xs font-bold shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-pink-700" />
               <span>Juguetería Mágica • Colección 2026</span>
             </div>
 

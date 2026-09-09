@@ -13,7 +13,6 @@ import { getWhatsAppNumber } from '@/lib/whatsapp';
 import {
   Flame,
   ArrowRight,
-  Sparkles,
   MessageCircle,
   Gift,
   PackageCheck
