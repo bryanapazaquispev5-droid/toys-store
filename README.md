@@ -18,8 +18,8 @@ Una tienda virtual moderna, interactiva y rápida diseñada para jugueterías y 
   - **Carrito de compras inteligente**: Permite agregar múltiples productos, especificar datos del cliente (nombre, teléfono, dirección/ciudad) y generar el resumen consolidado de la compra con cálculo automático de totales.
   - **Botón flotante de WhatsApp**: Para consultas generales y atención al cliente.
 
-- **🔐 Panel de Administración (`/admin`)**:
-  - Protegido por código PIN de seguridad (`1234` por defecto).
+- **🔐 Panel de Administración Privado**:
+  - Acceso seguro mediante ruta privada y contraseña maestra.
   - Creación de nuevos juguetes con título, precio, categoría, edad y stock.
   - **Subida directa de imágenes** a Supabase Storage (`toy-images`).
   - Interruptor de 1 clic para activar/desactivar disponibilidad de stock.
@@ -76,9 +76,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_PVq5buSIUNo6jYYEFQpw7Q_EIsJT4Pz
 # Store & WhatsApp Configuration
 NEXT_PUBLIC_WHATSAPP_PHONE=51987654321
 NEXT_PUBLIC_STORE_NAME=Juguetería Mágica
-
-# Admin Security PIN (Acceso al panel /admin)
-NEXT_PUBLIC_ADMIN_PIN=1234
 ```
 
 > 💡 **Nota**: Cambia `NEXT_PUBLIC_WHATSAPP_PHONE` por el número de WhatsApp real de tu tienda (con código de país sin el signo +, por ejemplo `51912345678` para Perú).
@@ -89,8 +86,7 @@ NEXT_PUBLIC_ADMIN_PIN=1234
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la tienda.  
-Para acceder al panel de administración, entra a [http://localhost:3000/admin](http://localhost:3000/admin) con el PIN `1234`.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la tienda.
 
 ---
 
