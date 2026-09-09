@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { HeroBanner } from '@/components/HeroBanner';
 import { CategoryShowcase } from '@/components/CategoryShowcase';
-import { ProductCard } from '@/components/ProductCard';
+import { FeaturedCarousel } from '@/components/FeaturedCarousel';
 import { Footer } from '@/components/Footer';
 import { Product } from '@/types/toy';
 import { fetchProducts } from '@/lib/supabase';
@@ -25,9 +25,9 @@ export default function Home() {
     async function loadFeatured() {
       setLoading(true);
       const all = await fetchProducts();
-      // Select top 6 products for wide showcase
-      const featured = all.filter((p) => p.featured || p.badge).slice(0, 6);
-      setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 6));
+      // Select top 8 products for wide showcase and mobile carousel
+      const featured = all.filter((p) => p.featured || p.badge).slice(0, 8);
+      setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 8));
       setLoading(false);
     }
     loadFeatured();
@@ -44,15 +44,15 @@ export default function Home() {
       <CategoryShowcase />
 
       {/* Featured Products in Soft Pastel Pink Section */}
-      <section id="destacados" className="py-12 sm:py-16 2xl:py-20 bg-pink-50/70 border-b border-pink-200">
+      <section id="destacados" className="py-10 sm:py-16 2xl:py-20 bg-pink-50/70 border-b border-pink-200">
         <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-200 text-pink-900 text-xs font-bold mb-1 border border-pink-300">
                 <span>Más Populares</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
                 Juguetes Destacados
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium">
@@ -62,31 +62,14 @@ export default function Home() {
 
             <Link
               href="/catalogo"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs group cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs group cursor-pointer self-start sm:self-auto"
             >
               <span>Ver Catálogo Completo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-pink-100/60 rounded-lg p-4 border border-pink-200 shadow-2xs animate-pulse">
-                  <div className="aspect-square bg-pink-200/70 rounded-md mb-3" />
-                  <div className="h-4 bg-pink-200 rounded w-2/3 mb-2" />
-                  <div className="h-3 bg-pink-200 rounded w-full mb-3" />
-                  <div className="h-8 bg-pink-200 rounded-full" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
+          <FeaturedCarousel products={featuredProducts} loading={loading} />
 
           {/* Clean CTA to full catalog */}
           <div className="mt-10 text-center">

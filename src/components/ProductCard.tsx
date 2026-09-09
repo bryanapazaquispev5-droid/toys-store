@@ -73,47 +73,47 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <div className="p-4 flex-1 flex flex-col justify-between">
+      <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
         <div>
           {/* Category & Age in solid pastels */}
-          <div className="flex items-center gap-1.5 mb-2 flex-wrap">
-            <span className="text-[11px] font-bold text-pink-900 bg-pink-200 border border-pink-300 px-2.5 py-0.5 rounded-md">
+          <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 flex-wrap">
+            <span className="text-[10px] sm:text-[11px] font-bold text-pink-900 bg-pink-200 border border-pink-300 px-2 sm:px-2.5 py-0.5 rounded-md">
               {product.category}
             </span>
-            <span className="text-[11px] font-bold text-sky-900 bg-sky-200 border border-sky-300 px-2.5 py-0.5 rounded-md">
+            <span className="text-[10px] sm:text-[11px] font-bold text-sky-900 bg-sky-200 border border-sky-300 px-2 sm:px-2.5 py-0.5 rounded-md">
               {product.age_range}
             </span>
           </div>
 
-          <h3 className="font-extrabold text-slate-900 text-sm leading-snug line-clamp-2 group-hover:text-pink-600 transition-colors">
+          <h3 className="font-extrabold text-slate-900 text-xs sm:text-sm leading-snug line-clamp-2 group-hover:text-pink-600 transition-colors">
             {product.name}
           </h3>
 
-          <p className="mt-1 text-xs text-slate-600 line-clamp-2 leading-relaxed">
+          <p className="mt-1 text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-relaxed hidden sm:block">
             {product.description}
           </p>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-slate-200">
-          <div className="flex items-baseline gap-2 mb-3">
-            <span className="text-lg font-black text-slate-900">
+        <div className="mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-slate-200">
+          <div className="flex items-baseline gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+            <span className="text-base sm:text-lg font-black text-slate-900">
               {currency} {product.price.toFixed(2)}
             </span>
             {product.original_price && product.original_price > product.price && (
-              <span className="text-xs text-slate-400 line-through">
+              <span className="text-[10px] sm:text-xs text-slate-400 line-through">
                 {currency} {product.original_price.toFixed(2)}
               </span>
             )}
           </div>
 
           {/* Rounded buttons only */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
             <button
               onClick={handleWhatsAppBuy}
               title="Pedir por WhatsApp"
-              className="w-full flex items-center justify-center gap-1.5 py-2 px-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors cursor-pointer shadow-2xs"
+              className="w-full flex items-center justify-center gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] sm:text-xs transition-colors cursor-pointer shadow-2xs"
             >
-              <MessageCircle className="w-3.5 h-3.5 fill-white" />
+              <MessageCircle className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-white shrink-0" />
               <span>Pedir</span>
             </button>
 
@@ -121,13 +121,13 @@ export function ProductCard({ product }: ProductCardProps) {
               onClick={handleAddToCart}
               disabled={!product.in_stock}
               title={product.in_stock ? 'Agregar al pedido' : 'Agotado'}
-              className={`w-full flex items-center justify-center gap-1.5 py-2 px-2 rounded-full font-bold text-xs transition-colors cursor-pointer ${
+              className={`w-full flex items-center justify-center gap-1 py-1.5 sm:py-2 px-1 sm:px-2 rounded-full font-bold text-[11px] sm:text-xs transition-colors cursor-pointer ${
                 product.in_stock
                   ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-2xs'
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               }`}
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
+              <ShoppingBag className="w-3 sm:w-3.5 h-3 sm:h-3.5 shrink-0" />
               <span>{product.in_stock ? '+ Carrito' : 'Agotado'}</span>
             </button>
           </div>
