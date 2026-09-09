@@ -21,11 +21,22 @@ import {
   ShoppingBag,
   AlertCircle,
   Sparkles,
+  Shapes,
   X
 } from 'lucide-react';
 import Link from 'next/link';
 
 type GenderFilter = 'todos' | 'niños' | 'niñas';
+
+const CATEGORY_OPTIONS = [
+  { value: 'Todos', label: 'Todos los tipos', icon: '🎁' },
+  { value: 'Peluches', label: 'Peluches', icon: '🧸' },
+  { value: 'Didácticos', label: 'Didácticos', icon: '🧩' },
+  { value: 'Figuras de Acción', label: 'Figuras de Acción', icon: '🦸' },
+  { value: 'Juegos de Mesa', label: 'Juegos de Mesa', icon: '🎲' },
+  { value: 'Vehículos y Pistas', label: 'Vehículos y Pistas', icon: '🚗' },
+  { value: 'Bebés', label: 'Bebés', icon: '👶' },
+];
 
 function CatalogContent() {
   const searchParams = useSearchParams();
@@ -43,7 +54,6 @@ function CatalogContent() {
   );
   const [selectedAge, setSelectedAge] = useState<string>('Todas las edades');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'name'>('featured');
-  const [onlyInStock, setOnlyInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   const { addToCart } = useCart();
@@ -94,13 +104,15 @@ function CatalogContent() {
           return false;
         }
 
-        if (onlyInStock && !product.in_stock) {
-          return false;
-        }
-
         return true;
       })
       .sort((a, b) => {
+        // 1. In-stock products always appear first, out-of-stock pushed to the very bottom
+        if (a.in_stock !== b.in_stock) {
+          return a.in_stock ? -1 : 1;
+        }
+
+        // 2. Secondary sort criteria chosen by user
         if (sortBy === 'featured') {
           return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
         }
@@ -115,13 +127,12 @@ function CatalogContent() {
         }
         return 0;
       });
-  }, [products, search, selectedGender, selectedCategory, selectedAge, onlyInStock, sortBy]);
+  }, [products, search, selectedGender, selectedCategory, selectedAge, sortBy]);
 
   const activeFiltersCount =
     (selectedGender !== 'todos' ? 1 : 0) +
     (selectedCategory !== 'Todos' ? 1 : 0) +
     (selectedAge !== 'Todas las edades' ? 1 : 0) +
-    (onlyInStock ? 1 : 0) +
     (search.trim() ? 1 : 0);
 
   const resetAllFilters = () => {
@@ -129,7 +140,6 @@ function CatalogContent() {
     setSelectedGender('todos');
     setSelectedCategory('Todos');
     setSelectedAge('Todas las edades');
-    setOnlyInStock(false);
     setSortBy('featured');
   };
 
@@ -149,7 +159,7 @@ function CatalogContent() {
               Catálogo de Juguetes
             </h1>
             <p className="text-xs sm:text-sm 2xl:text-base text-sky-800 mt-1 font-medium">
-              Elige juguetes para niños, niñas o para todos, filtra por edad y pide directo a WhatsApp.
+              Elige juguetes para niños, niñas o para todos, filtra por tipo y edad, y pide directo a WhatsApp.
             </p>
           </div>
 
@@ -200,26 +210,6 @@ function CatalogContent() {
               </button>
             </div>
           </div>
-
-          {/* Category Filter Pills */}
-          <div className="mt-5 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-            {CATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
-                    isSelected
-                      ? 'bg-sky-600 text-white shadow-xs'
-                      : 'bg-white hover:bg-sky-200/80 text-sky-950 border border-sky-200'
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
         </div>
       </div>
 
@@ -247,11 +237,21 @@ function CatalogContent() {
           )}
         </div>
 
-        {/* Control Bar: Filters in rich pastel amber */}
+        {/* UNIFIED SINGLE CONTROL BAR: All filters cleanly organized in one place */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-amber-100/70 p-3.5 rounded-2xl border-2 border-amber-300 shadow-2xs">
           
           <div className="flex items-center gap-3 flex-wrap">
-            {/* Custom Styled Age Filter */}
+            {/* 1. Tipo / Categoría de Juguete (First on the left) */}
+            <CustomSelect
+              variant="amber"
+              icon={<Shapes className="w-3.5 h-3.5" />}
+              labelPrefix="Tipo:"
+              value={selectedCategory}
+              onChange={(val) => setSelectedCategory(val as Category)}
+              options={CATEGORY_OPTIONS}
+            />
+
+            {/* 2. Edad (Second) */}
             <CustomSelect
               variant="amber"
               icon={<Filter className="w-3.5 h-3.5" />}
@@ -261,21 +261,10 @@ function CatalogContent() {
               options={AGE_RANGES}
             />
 
-            {/* In stock toggle */}
-            <label className="flex items-center gap-2 text-xs font-black text-amber-950 bg-white border-2 border-amber-300 hover:border-amber-400 px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-amber-50 transition-colors shadow-2xs">
-              <input
-                type="checkbox"
-                checked={onlyInStock}
-                onChange={(e) => setOnlyInStock(e.target.checked)}
-                className="w-3.5 h-3.5 text-amber-600 rounded-md focus:ring-amber-400"
-              />
-              <span>Solo en Stock</span>
-            </label>
-
             {activeFiltersCount > 0 && (
               <button
                 onClick={resetAllFilters}
-                className="text-xs font-black text-rose-600 hover:text-rose-700 underline px-1 py-1 cursor-pointer"
+                className="text-xs font-black text-rose-600 hover:text-rose-700 underline px-2 py-1 cursor-pointer"
               >
                 Limpiar ({activeFiltersCount})
               </button>
@@ -283,7 +272,7 @@ function CatalogContent() {
           </div>
 
           <div className="flex items-center gap-2 justify-between sm:justify-end">
-            {/* Custom Styled Sorting Filter */}
+            {/* 3. Ordenar */}
             <CustomSelect
               variant="amber"
               icon={<SlidersHorizontal className="w-3.5 h-3.5" />}
