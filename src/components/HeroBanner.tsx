@@ -10,15 +10,15 @@ export function HeroBanner() {
 
   return (
     <section className="relative overflow-hidden py-10 md:py-16 2xl:py-20 border-b border-slate-200">
-      {/* Background Image - Vibrant & Clear */}
+      {/* Background Image - High Quality with Soft Diffusion */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero-banner.png"
+          src="/hero-banner.jpg"
           alt="Fondo Juguetería Mágica"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center scale-105 filter blur-[1.5px]"
         />
-        {/* Very subtle tint to prevent washing out the image */}
-        <div className="absolute inset-0 bg-black/10" />
+        {/* Soft 90% translucent white overlay for pastel glow */}
+        <div className="absolute inset-0 bg-white/15 backdrop-blur-[1px]" />
       </div>
 
       <div className="relative z-10 w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
