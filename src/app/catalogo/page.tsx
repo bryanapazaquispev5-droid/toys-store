@@ -146,66 +146,79 @@ function CatalogContent() {
     <div className="flex-1 flex flex-col min-h-screen bg-white">
       <Navbar />
 
-      {/* Header section in rich pastel sky */}
-      <div className="bg-sky-100/90 border-b border-sky-200 py-8 2xl:py-10">
-        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
-              <span>Catálogo Completo</span>
+      {/* Header section with Custom Banner Background */}
+      <div className="relative overflow-hidden border-b border-sky-200 py-8 sm:py-10 2xl:py-12">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/fondo-catalogo.jpg"
+            alt="Fondo Catálogo de Juguetes"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Subtle overlay to enhance contrast */}
+          <div className="absolute inset-0 bg-sky-950/15 backdrop-blur-[1px]" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
+          <div className="bg-white/85 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/90 shadow-xl max-w-3xl lg:max-w-4xl">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-200/90 text-sky-950 font-black text-xs mb-2.5 border border-sky-300 shadow-2xs">
+                <span>Catálogo Completo</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-slate-900 tracking-tight">
+                Catálogo de Juguetes
+              </h1>
+              <p className="text-xs sm:text-sm 2xl:text-base text-slate-700 mt-1 font-medium leading-relaxed">
+                Elige juguetes para niños, niñas o para todos, filtra por tipo y edad, y pide directo a WhatsApp.
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-sky-950 tracking-tight">
-              Catálogo de Juguetes
-            </h1>
-            <p className="text-xs sm:text-sm 2xl:text-base text-sky-800 mt-1 font-medium">
-              Elige juguetes para niños, niñas o para todos, filtra por tipo y edad, y pide directo a WhatsApp.
-            </p>
-          </div>
 
-          {/* PROMINENT GENDER SEPARATOR (Niños / Niñas / Todos) */}
-          <div className="mt-6 pt-5 border-t border-sky-200/80">
-            <p className="text-xs font-black text-sky-900 mb-2 uppercase tracking-wide">
-              ¿Para quién es el juguete?
-            </p>
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-              
-              {/* Boys Button */}
-              <button
-                onClick={() => setSelectedGender('niños')}
-                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
-                  selectedGender === 'niños'
-                    ? 'bg-sky-500 text-white border-sky-600 shadow-md scale-102'
-                    : 'bg-white hover:bg-sky-50 text-sky-900 border-sky-200 shadow-2xs'
-                }`}
-              >
-                <span className="text-base sm:text-xl">👦</span>
-                <span>Para Niños</span>
-              </button>
+            {/* PROMINENT GENDER SEPARATOR (Niños / Niñas / Todos) */}
+            <div className="mt-5 pt-4 border-t border-slate-200/80">
+              <p className="text-xs font-black text-slate-800 mb-2 uppercase tracking-wide">
+                ¿Para quién es el juguete?
+              </p>
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-2xl lg:max-w-3xl">
+                
+                {/* Boys Button */}
+                <button
+                  onClick={() => setSelectedGender('niños')}
+                  className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                    selectedGender === 'niños'
+                      ? 'bg-sky-500 text-white border-sky-600 shadow-md scale-102'
+                      : 'bg-white/95 hover:bg-sky-50 text-sky-900 border-sky-200 shadow-2xs'
+                  }`}
+                >
+                  <span className="text-base sm:text-xl">👦</span>
+                  <span>Para Niños</span>
+                </button>
 
-              {/* Girls Button */}
-              <button
-                onClick={() => setSelectedGender('niñas')}
-                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
-                  selectedGender === 'niñas'
-                    ? 'bg-pink-500 text-white border-pink-600 shadow-md scale-102'
-                    : 'bg-white hover:bg-pink-50 text-pink-900 border-pink-200 shadow-2xs'
-                }`}
-              >
-                <span className="text-base sm:text-xl">👧</span>
-                <span>Para Niñas</span>
-              </button>
+                {/* Girls Button */}
+                <button
+                  onClick={() => setSelectedGender('niñas')}
+                  className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                    selectedGender === 'niñas'
+                      ? 'bg-pink-500 text-white border-pink-600 shadow-md scale-102'
+                      : 'bg-white/95 hover:bg-pink-50 text-pink-900 border-pink-200 shadow-2xs'
+                  }`}
+                >
+                  <span className="text-base sm:text-xl">👧</span>
+                  <span>Para Niñas</span>
+                </button>
 
-              {/* All / Unisex Button */}
-              <button
-                onClick={() => setSelectedGender('todos')}
-                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
-                  selectedGender === 'todos'
-                    ? 'bg-amber-400 text-amber-950 border-amber-500 shadow-md scale-102'
-                    : 'bg-white hover:bg-amber-50 text-amber-950 border-amber-200 shadow-2xs'
-                }`}
-              >
-                <span className="text-base sm:text-xl">🧸</span>
-                <span>Para Todos</span>
-              </button>
+                {/* All / Unisex Button */}
+                <button
+                  onClick={() => setSelectedGender('todos')}
+                  className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                    selectedGender === 'todos'
+                      ? 'bg-amber-400 text-amber-950 border-amber-500 shadow-md scale-102'
+                      : 'bg-white/95 hover:bg-amber-50 text-amber-950 border-amber-200 shadow-2xs'
+                  }`}
+                >
+                  <span className="text-base sm:text-xl">🧸</span>
+                  <span>Para Todos</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
