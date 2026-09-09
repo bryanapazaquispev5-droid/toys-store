@@ -86,14 +86,14 @@ export default function Home() {
       </section>
 
       {/* WhatsApp Consultation Banner in Soft Pastel Mint */}
-      <section className="py-12 sm:py-16 bg-emerald-100 border-b border-emerald-300 text-emerald-950">
+      <section className="py-8 sm:py-14 bg-emerald-100 border-b border-emerald-300 text-emerald-950">
         <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center lg:text-left max-w-3xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-200 text-emerald-950 text-xs font-bold border border-emerald-300">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
+            <div className="space-y-1.5 text-center lg:text-left max-w-3xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-200 text-emerald-950 text-xs font-bold border border-emerald-300">
                 <span>Asesoría Personalizada</span>
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight">
+              <h3 className="text-lg sm:text-2xl lg:text-3xl font-black tracking-tight">
                 ¿Buscas un regalo y necesitas recomendaciones?
               </h3>
               <p className="text-xs sm:text-sm text-emerald-900 font-medium">
@@ -105,9 +105,9 @@ export default function Home() {
               href={`/mensaje-enviado?text=${encodeURIComponent('¡Hola! Quisiera que me asesoren para elegir un regalo según la edad 🧸')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-xs transition-colors flex items-center gap-2.5 shrink-0 cursor-pointer"
+              className="w-full sm:w-auto justify-center px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center gap-2 shrink-0 cursor-pointer"
             >
-              <MessageCircle className="w-5 h-5 fill-white" />
+              <MessageCircle className="w-4 h-4 fill-white" />
               <span>Escribir por WhatsApp</span>
             </a>
           </div>
@@ -115,46 +115,52 @@ export default function Home() {
       </section>
 
       {/* 3 Steps Guide in Soft Pastel Sky Section */}
-      <section className="py-12 sm:py-16 2xl:py-20 bg-sky-50 border-b border-sky-200">
+      <section className="py-7 sm:py-14 2xl:py-16 bg-sky-50 border-b border-sky-200">
         <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 text-center">
-          <div className="max-w-md mx-auto mb-10">
-            <h2 className="text-2xl font-black text-sky-950 tracking-tight">
+          <div className="max-w-md mx-auto mb-4 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-black text-sky-950 tracking-tight">
               ¿Cómo hacer tu pedido?
             </h2>
-            <p className="text-xs text-sky-800 mt-1 font-medium">
+            <p className="text-[11px] sm:text-xs text-sky-800 mt-0.5 font-medium">
               3 pasos sencillos para recibir tus juguetes en casa.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
-            <div className="p-5 rounded-lg bg-sky-100 border border-sky-300">
-              <div className="w-9 h-9 rounded-full bg-sky-300 text-sky-950 font-bold text-sm flex items-center justify-center mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-5 text-left">
+            <div className="p-3 sm:p-5 rounded-2xl bg-sky-100 border border-sky-300 flex md:flex-col items-center md:items-start gap-3 md:gap-0 shadow-2xs">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-sky-300 text-sky-950 font-black text-xs sm:text-sm flex items-center justify-center shrink-0 md:mb-3">
                 1
               </div>
-              <h4 className="font-bold text-sky-950 text-sm">Explora el Catálogo</h4>
-              <p className="text-xs text-sky-900 mt-1 leading-relaxed">
-                Revisa los productos, haz clic para ver fotos y agrega los juguetes a tu pedido.
-              </p>
+              <div>
+                <h4 className="font-bold text-sky-950 text-xs sm:text-sm">Explora el Catálogo</h4>
+                <p className="text-[11px] sm:text-xs text-sky-900 mt-0.5 leading-snug sm:leading-relaxed">
+                  Revisa los productos, fotos y agrégalos a tu pedido.
+                </p>
+              </div>
             </div>
 
-            <div className="p-5 rounded-lg bg-pink-100 border border-pink-300">
-              <div className="w-9 h-9 rounded-full bg-pink-300 text-pink-950 font-bold text-sm flex items-center justify-center mb-3">
+            <div className="p-3 sm:p-5 rounded-2xl bg-pink-100 border border-pink-300 flex md:flex-col items-center md:items-start gap-3 md:gap-0 shadow-2xs">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-pink-300 text-pink-950 font-black text-xs sm:text-sm flex items-center justify-center shrink-0 md:mb-3">
                 2
               </div>
-              <h4 className="font-bold text-pink-950 text-sm">Envía a WhatsApp</h4>
-              <p className="text-xs text-pink-900 mt-1 leading-relaxed">
-                Toca el botón y se enviará tu pedido formateado con precios y datos de entrega.
-              </p>
+              <div>
+                <h4 className="font-bold text-pink-950 text-xs sm:text-sm">Envía a WhatsApp</h4>
+                <p className="text-[11px] sm:text-xs text-pink-900 mt-0.5 leading-snug sm:leading-relaxed">
+                  Toca el botón y se enviará tu pedido con precios y datos.
+                </p>
+              </div>
             </div>
 
-            <div className="p-5 rounded-lg bg-amber-100 border border-amber-300">
-              <div className="w-9 h-9 rounded-full bg-amber-300 text-amber-950 font-bold text-sm flex items-center justify-center mb-3">
+            <div className="p-3 sm:p-5 rounded-2xl bg-amber-100 border border-amber-300 flex md:flex-col items-center md:items-start gap-3 md:gap-0 shadow-2xs">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-amber-300 text-amber-950 font-black text-xs sm:text-sm flex items-center justify-center shrink-0 md:mb-3">
                 3
               </div>
-              <h4 className="font-bold text-amber-950 text-sm">Paga y Recibe</h4>
-              <p className="text-xs text-amber-900 mt-1 leading-relaxed">
-                Paga fácil con Yape, Plin o Transferencia y coordinamos el delivery a tu casa.
-              </p>
+              <div>
+                <h4 className="font-bold text-amber-950 text-xs sm:text-sm">Paga y Recibe</h4>
+                <p className="text-[11px] sm:text-xs text-amber-900 mt-0.5 leading-snug sm:leading-relaxed">
+                  Paga con Yape, Plin o Transferencia y coordinamos el delivery.
+                </p>
+              </div>
             </div>
           </div>
         </div>
