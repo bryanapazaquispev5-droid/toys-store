@@ -7,12 +7,7 @@ import { ShoppingBag, MessageCircle, Search, Menu, X, Shield } from 'lucide-reac
 import { useCart } from '@/context/CartContext';
 import { getWhatsAppNumber, getStoreName } from '@/lib/whatsapp';
 
-interface NavbarProps {
-  searchTerm?: string;
-  onSearchChange?: (val: string) => void;
-}
-
-export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
+export function Navbar() {
   const { totalItems, openCart } = useCart();
   const phone = getWhatsAppNumber();
   const storeName = getStoreName();
@@ -61,30 +56,6 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           </nav>
         </div>
 
-        {/* Center: Search input */}
-        {onSearchChange ? (
-          <div className="hidden lg:flex flex-1 max-w-sm xl:max-w-md 2xl:max-w-lg relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-sky-600" />
-            <input
-              type="text"
-              placeholder="Buscar juguetes..."
-              value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-all text-slate-900 placeholder-sky-400"
-            />
-          </div>
-        ) : (
-          <div className="hidden lg:flex">
-            <Link
-              href="/catalogo"
-              className="text-xs font-bold text-sky-900 hover:text-sky-950 flex items-center gap-2 transition-colors py-1.5 px-4 rounded-full bg-sky-200/80 hover:bg-sky-200"
-            >
-              <Search className="w-3.5 h-3.5 text-sky-700" />
-              <span>Buscar en el catálogo...</span>
-            </Link>
-          </div>
-        )}
-
         {/* Right: Actions */}
         <div className="flex items-center gap-3">
           {/* WhatsApp Direct */}
@@ -129,22 +100,6 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           </button>
         </div>
       </div>
-
-      {/* Mobile search bar if on catalog */}
-      {onSearchChange && (
-        <div className="lg:hidden px-4 pb-3">
-          <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-600" />
-            <input
-              type="text"
-              placeholder="Buscar en el catálogo..."
-              value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-white rounded-full border-2 border-sky-300 outline-hidden text-slate-900"
-            />
-          </div>
-        </div>
-      )}
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
