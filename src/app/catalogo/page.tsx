@@ -148,19 +148,19 @@ function CatalogContent() {
 
       {/* Header section with Custom Banner Background */}
       <div className="relative overflow-hidden border-b border-sky-200 py-8 sm:py-10 2xl:py-12">
-        {/* Background Image */}
+        {/* Background Image with soft diffusion */}
         <div className="absolute inset-0 z-0">
           <img
             src="/fondo-catalogo.jpg"
             alt="Fondo Catálogo de Juguetes"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center scale-105 filter blur-[1.5px]"
           />
-          {/* Subtle overlay to enhance contrast */}
-          <div className="absolute inset-0 bg-sky-950/15 backdrop-blur-[1px]" />
+          {/* 90% transparent white overlay with soft glow */}
+          <div className="absolute inset-0 bg-white/15 backdrop-blur-[1px]" />
         </div>
 
         <div className="relative z-10 w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div className="bg-white/85 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/90 shadow-xl max-w-3xl lg:max-w-4xl">
+          <div className="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/90 shadow-xl max-w-3xl lg:max-w-4xl">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-200/90 text-sky-950 font-black text-xs mb-2.5 border border-sky-300 shadow-2xs">
                 <span>Catálogo Completo</span>
