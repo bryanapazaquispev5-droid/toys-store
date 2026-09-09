@@ -137,36 +137,36 @@ function CatalogContent() {
       <Navbar searchTerm={search} onSearchChange={setSearch} />
 
       {/* Header section in rich pastel sky */}
-      <div className="bg-sky-100/90 border-b border-sky-200 py-8">
-        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-sky-100/90 border-b border-sky-200 py-8 2xl:py-10">
+        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 lg:gap-8">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
                 <Sparkles className="w-3.5 h-3.5 text-sky-700" />
                 <span>Catálogo Completo</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-sky-950 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black text-sky-950 tracking-tight">
                 Catálogo de Juguetes
               </h1>
-              <p className="text-xs sm:text-sm text-sky-800 mt-1 font-medium">
+              <p className="text-xs sm:text-sm 2xl:text-base text-sky-800 mt-1 font-medium">
                 Elige juguetes para niños, niñas o para todos, filtra por edad y pide directo a WhatsApp.
               </p>
             </div>
 
             {/* Live Search Input Box */}
-            <div className="w-full md:w-80 lg:w-96 relative">
+            <div className="w-full md:w-80 lg:w-96 xl:w-1/3 min-[2000px]:w-1/4 relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-600" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar por nombre, tipo o edad..."
-                className="w-full pl-10 pr-9 py-2.5 text-xs font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-colors text-slate-900 placeholder-sky-400 shadow-2xs"
+                className="w-full pl-10 pr-9 py-2.5 2xl:py-3 text-xs sm:text-sm font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-colors text-slate-900 placeholder-sky-400 shadow-2xs"
               />
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -179,44 +179,44 @@ function CatalogContent() {
             <p className="text-xs font-black text-sky-900 mb-2 uppercase tracking-wide">
               ¿Para quién es el juguete?
             </p>
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-xl">
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-2xl lg:max-w-3xl xl:max-w-4xl">
               
               {/* Boys Button */}
               <button
                 onClick={() => setSelectedGender('niños')}
-                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
                   selectedGender === 'niños'
                     ? 'bg-sky-500 text-white border-sky-600 shadow-md scale-102'
                     : 'bg-white hover:bg-sky-50 text-sky-900 border-sky-200 shadow-2xs'
                 }`}
               >
-                <span className="text-base sm:text-lg">👦</span>
+                <span className="text-base sm:text-xl">👦</span>
                 <span>Para Niños</span>
               </button>
 
               {/* Girls Button */}
               <button
                 onClick={() => setSelectedGender('niñas')}
-                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
                   selectedGender === 'niñas'
                     ? 'bg-pink-500 text-white border-pink-600 shadow-md scale-102'
                     : 'bg-white hover:bg-pink-50 text-pink-900 border-pink-200 shadow-2xs'
                 }`}
               >
-                <span className="text-base sm:text-lg">👧</span>
+                <span className="text-base sm:text-xl">👧</span>
                 <span>Para Niñas</span>
               </button>
 
               {/* All / Unisex Button */}
               <button
                 onClick={() => setSelectedGender('todos')}
-                className={`py-3 px-3 sm:px-5 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
+                className={`py-3 sm:py-3.5 px-3 sm:px-6 rounded-full font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-2 ${
                   selectedGender === 'todos'
                     ? 'bg-amber-400 text-amber-950 border-amber-500 shadow-md scale-102'
                     : 'bg-white hover:bg-amber-50 text-amber-950 border-amber-200 shadow-2xs'
                 }`}
               >
-                <span className="text-base sm:text-lg">🌟</span>
+                <span className="text-base sm:text-xl">🌟</span>
                 <span>Para Todos</span>
               </button>
             </div>
@@ -245,7 +245,7 @@ function CatalogContent() {
       </div>
 
       {/* Control Bar: Filters in rich pastel amber */}
-      <main className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+      <main className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 py-6 sm:py-8 w-full flex-1">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-amber-100/70 p-3.5 rounded-lg border-2 border-amber-300 shadow-2xs">
           
           <div className="flex items-center gap-3 flex-wrap">
@@ -352,8 +352,8 @@ function CatalogContent() {
 
         {/* Products Display */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
-            {[...Array(8)].map((_, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 min-[2100px]:grid-cols-7 min-[2500px]:grid-cols-8 gap-4 sm:gap-5 lg:gap-6">
+            {[...Array(12)].map((_, i) => (
               <div key={i} className="bg-slate-50 rounded-lg p-4 border border-slate-200 shadow-2xs animate-pulse">
                 <div className="aspect-square bg-slate-200 rounded-md mb-3" />
                 <div className="h-4 bg-slate-200 rounded w-2/3 mb-2" />
@@ -376,7 +376,7 @@ function CatalogContent() {
             </button>
           </div>
         ) : viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 min-[2100px]:grid-cols-7 min-[2500px]:grid-cols-8 gap-4 sm:gap-5 lg:gap-6">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

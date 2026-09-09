@@ -26,7 +26,7 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-50 bg-sky-100 border-b border-sky-200 shadow-xs">
-      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 sm:gap-6">
+      <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 h-16 flex items-center justify-between gap-4 sm:gap-6">
         
         {/* Left: Brand & Nav Links */}
         <div className="flex items-center gap-6 sm:gap-8">
@@ -63,7 +63,7 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
 
         {/* Center: Search input */}
         {onSearchChange ? (
-          <div className="hidden lg:flex flex-1 max-w-xs relative">
+          <div className="hidden lg:flex flex-1 max-w-sm xl:max-w-md 2xl:max-w-lg relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-sky-600" />
             <input
               type="text"

@@ -28,9 +28,9 @@ export default function Home() {
     async function loadFeatured() {
       setLoading(true);
       const all = await fetchProducts();
-      // Select top 4 products for clean showcase
-      const featured = all.filter((p) => p.featured || p.badge).slice(0, 4);
-      setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 4));
+      // Select top 6 products for wide showcase
+      const featured = all.filter((p) => p.featured || p.badge).slice(0, 6);
+      setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 6));
       setLoading(false);
     }
     loadFeatured();
@@ -47,8 +47,8 @@ export default function Home() {
       <CategoryShowcase />
 
       {/* Featured Products in Soft Pastel Pink Section */}
-      <section id="destacados" className="py-12 sm:py-16 bg-pink-50/70 border-b border-pink-200">
-        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="destacados" className="py-12 sm:py-16 2xl:py-20 bg-pink-50/70 border-b border-pink-200">
+        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
@@ -74,8 +74,8 @@ export default function Home() {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[...Array(4)].map((_, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
+              {[...Array(6)].map((_, i) => (
                 <div key={i} className="bg-pink-100/60 rounded-lg p-4 border border-pink-200 shadow-2xs animate-pulse">
                   <div className="aspect-square bg-pink-200/70 rounded-md mb-3" />
                   <div className="h-4 bg-pink-200 rounded w-2/3 mb-2" />
@@ -85,7 +85,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
               {featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -107,10 +107,10 @@ export default function Home() {
       </section>
 
       {/* WhatsApp Consultation Banner in Soft Pastel Mint */}
-      <section className="py-12 bg-emerald-100 border-b border-emerald-300 text-emerald-950">
-        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 bg-emerald-100 border-b border-emerald-300 text-emerald-950">
+        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center lg:text-left max-w-2xl">
+            <div className="space-y-2 text-center lg:text-left max-w-3xl">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-200 text-emerald-950 text-xs font-bold border border-emerald-300">
                 <Gift className="w-3.5 h-3.5 text-emerald-800" />
                 <span>Asesoría Personalizada</span>
@@ -137,8 +137,8 @@ export default function Home() {
       </section>
 
       {/* 3 Steps Guide in Soft Pastel Sky Section */}
-      <section className="py-12 sm:py-16 bg-sky-50 border-b border-sky-200">
-        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-12 sm:py-16 2xl:py-20 bg-sky-50 border-b border-sky-200">
+        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 text-center">
           <div className="max-w-md mx-auto mb-10">
             <h2 className="text-2xl font-black text-sky-950 tracking-tight">
               ¿Cómo hacer tu pedido?

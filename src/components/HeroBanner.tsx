@@ -9,22 +9,22 @@ export function HeroBanner() {
   const phone = getWhatsAppNumber();
 
   return (
-    <section className="bg-pink-50/60 py-10 md:py-14 border-b border-pink-200">
-      <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <section className="bg-pink-50/60 py-10 md:py-16 2xl:py-20 border-b border-pink-200">
+      <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Headline & Action */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-5">
+          <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 text-center lg:text-left space-y-5 2xl:space-y-7">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-200 border border-pink-300 text-pink-900 text-xs font-bold shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-pink-700" />
               <span>Juguetería Mágica • Colección 2026</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl 2xl:text-6xl font-black text-slate-900 tracking-tight leading-tight">
               Los mejores juguetes para jugar, aprender y sonreír.
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-700 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+            <p className="text-sm sm:text-base xl:text-lg text-slate-700 max-w-xl xl:max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
               Peluches, juegos didácticos, pistas y figuras para todas las edades. Pide fácil por WhatsApp con delivery a domicilio.
             </p>
 
@@ -67,8 +67,8 @@ export function HeroBanner() {
           </div>
 
           {/* Right Column: Showcase Image */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md aspect-4/3 sm:aspect-square rounded-lg overflow-hidden border-2 border-amber-300 bg-amber-100 p-2 shadow-sm">
+          <div className="lg:col-span-5 xl:col-span-5 2xl:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl aspect-4/3 sm:aspect-square rounded-lg overflow-hidden border-2 border-amber-300 bg-amber-100 p-2 sm:p-3 shadow-sm">
               <img
                 src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=1000&auto=format&fit=crop&q=80"
                 alt="Juguetes y Peluches"
@@ -97,34 +97,34 @@ export function HeroBanner() {
         </div>
 
         {/* 3 Pastel Pillars Feature Cards */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="bg-sky-100 p-4 rounded-lg border border-sky-300 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-sky-300 text-sky-900 flex items-center justify-center shrink-0">
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-6">
+          <div className="bg-sky-100 p-4 sm:p-5 rounded-lg border border-sky-300 flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-full bg-sky-300 text-sky-900 flex items-center justify-center shrink-0">
               <Truck className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-black text-sky-950">Envíos Seguros</h4>
-              <p className="text-[11px] text-sky-900 mt-0.5 font-medium">Entregas directas a tu casa.</p>
+              <p className="text-[11px] sm:text-xs text-sky-900 mt-0.5 font-medium">Entregas directas a tu casa.</p>
             </div>
           </div>
 
-          <div className="bg-pink-100 p-4 rounded-lg border border-pink-300 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-pink-300 text-pink-900 flex items-center justify-center shrink-0">
+          <div className="bg-pink-100 p-4 sm:p-5 rounded-lg border border-pink-300 flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-full bg-pink-300 text-pink-900 flex items-center justify-center shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-black text-pink-950">Pagos Fáciles</h4>
-              <p className="text-[11px] text-pink-900 mt-0.5 font-medium">Aceptamos Yape, Plin y Transferencia.</p>
+              <p className="text-[11px] sm:text-xs text-pink-900 mt-0.5 font-medium">Aceptamos Yape, Plin y Transferencia.</p>
             </div>
           </div>
 
-          <div className="bg-purple-100 p-4 rounded-lg border border-purple-300 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-purple-300 text-purple-900 flex items-center justify-center shrink-0">
+          <div className="bg-purple-100 p-4 sm:p-5 rounded-lg border border-purple-300 flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-full bg-purple-300 text-purple-900 flex items-center justify-center shrink-0">
               <Clock className="w-5 h-5" />
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-black text-purple-950">Atención WhatsApp</h4>
-              <p className="text-[11px] text-purple-900 mt-0.5 font-medium">Te asesoramos con fotos y videos.</p>
+              <p className="text-[11px] sm:text-xs text-purple-900 mt-0.5 font-medium">Te asesoramos con fotos y videos.</p>
             </div>
           </div>
         </div>

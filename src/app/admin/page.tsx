@@ -273,7 +273,7 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
       <header className="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+        <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
               href="/"
@@ -299,7 +299,7 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 space-y-8">
+      <main className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 py-8 w-full flex-1 space-y-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs flex items-center justify-between">
             <div>
