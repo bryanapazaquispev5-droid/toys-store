@@ -48,24 +48,31 @@ export default function AdminPage() {
   const [formMessage, setFormMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
   const MASTER_ADMIN_PASSWORD = 'Jugueteria#98xK$2026!SecuredAdmin';
-  const expectedPin = process.env.NEXT_PUBLIC_ADMIN_PIN || MASTER_ADMIN_PASSWORD;
   const currency = getCurrency();
 
   useEffect(() => {
-    const auth = sessionStorage.getItem('admin_authenticated');
-    if (auth === 'true') {
+    // Invalidate old sessions and only accept valid session for this exact password
+    const authSession = sessionStorage.getItem('admin_session_token_v2');
+    if (authSession === MASTER_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
+    } else {
+      sessionStorage.removeItem('admin_authenticated');
+      sessionStorage.removeItem('admin_session_token_v2');
+      setIsAuthenticated(false);
     }
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Strict verification: only the exact difficult master password
-    if (pinInput.trim() === expectedPin.trim() || pinInput.trim() === MASTER_ADMIN_PASSWORD) {
+    const entered = pinInput.trim();
+
+    // STRICT CHECK: ONLY the exact master password
+    if (entered === MASTER_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
-      sessionStorage.setItem('admin_authenticated', 'true');
+      sessionStorage.setItem('admin_session_token_v2', MASTER_ADMIN_PASSWORD);
       setPinError(false);
     } else {
+      setIsAuthenticated(false);
       setPinError(true);
     }
   };
@@ -73,6 +80,7 @@ export default function AdminPage() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_session_token_v2');
     setPinInput('');
   };
 
