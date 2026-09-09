@@ -2,71 +2,59 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Heart, Brain, Gamepad2, Car, Baby, Shapes } from 'lucide-react';
 
 const CATEGORY_CARDS = [
   {
     name: 'Peluches',
-    emoji: '🧸',
-    desc: 'Suaves, tiernos y abrazables',
-    bg: 'from-amber-500/10 to-rose-500/10 hover:from-amber-500/20 hover:to-rose-500/20',
-    border: 'border-amber-200/70',
-    textAccent: 'text-amber-700',
+    icon: Heart,
+    desc: 'Suaves y abrazables',
+    accent: 'text-rose-600 bg-rose-50 border-rose-100',
   },
   {
     name: 'Didácticos',
-    emoji: '🧩',
-    desc: 'Estimulación, bloques y lógica',
-    bg: 'from-blue-500/10 to-indigo-500/10 hover:from-blue-500/20 hover:to-indigo-500/20',
-    border: 'border-blue-200/70',
-    textAccent: 'text-blue-700',
+    icon: Brain,
+    desc: 'Estimulación y lógica',
+    accent: 'text-blue-600 bg-blue-50 border-blue-100',
   },
   {
     name: 'Figuras de Acción',
-    emoji: '🦸‍♂️',
-    desc: 'Héroes, robots y personajes',
-    bg: 'from-red-500/10 to-orange-500/10 hover:from-red-500/20 hover:to-orange-500/20',
-    border: 'border-red-200/70',
-    textAccent: 'text-red-700',
+    icon: Shapes,
+    desc: 'Héroes y personajes',
+    accent: 'text-orange-600 bg-orange-50 border-orange-100',
   },
   {
     name: 'Juegos de Mesa',
-    emoji: '🎲',
-    desc: 'Diversión familiar y estrategia',
-    bg: 'from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20',
-    border: 'border-emerald-200/70',
-    textAccent: 'text-emerald-700',
+    icon: Gamepad2,
+    desc: 'Diversión familiar',
+    accent: 'text-emerald-600 bg-emerald-50 border-emerald-100',
   },
   {
     name: 'Vehículos y Pistas',
-    emoji: '🏎️',
-    desc: 'Carros a control y circuitos',
-    bg: 'from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20',
-    border: 'border-purple-200/70',
-    textAccent: 'text-purple-700',
+    icon: Car,
+    desc: 'Autos y circuitos',
+    accent: 'text-purple-600 bg-purple-50 border-purple-100',
   },
   {
     name: 'Bebés',
-    emoji: '🍼',
-    desc: 'Mordederas, sonajeros y primera edad',
-    bg: 'from-cyan-500/10 to-sky-500/10 hover:from-cyan-500/20 hover:to-sky-500/20',
-    border: 'border-cyan-200/70',
-    textAccent: 'text-cyan-700',
+    icon: Baby,
+    desc: 'Mordederas y sonajeros',
+    accent: 'text-cyan-600 bg-cyan-50 border-cyan-100',
   },
 ];
 
 export function CategoryShowcase() {
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-slate-100">
+    <section className="py-12 sm:py-16 bg-white border-b border-slate-200">
       <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="flex items-center gap-2 text-rose-500 font-bold text-xs uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-rose-600 font-bold text-xs uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Explora por Categoría</span>
+              <span>Categorías</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
-              Encuentra el regalo perfecto
+              Explora por Tipo de Juguete
             </h2>
           </div>
 
@@ -79,27 +67,30 @@ export function CategoryShowcase() {
           </Link>
         </div>
 
-        {/* 6 Category Bento Grid */}
+        {/* Crisp clean 6-column category cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-          {CATEGORY_CARDS.map((cat) => (
-            <Link
-              key={cat.name}
-              href={`/catalogo?categoria=${encodeURIComponent(cat.name)}`}
-              className={`p-4 sm:p-5 rounded-3xl bg-linear-to-b ${cat.bg} border ${cat.border} transition-all duration-300 hover:scale-103 hover:shadow-lg flex flex-col justify-between group cursor-pointer text-center sm:text-left`}
-            >
-              <div className="text-3xl sm:text-4xl mb-3 transform group-hover:scale-110 transition-transform">
-                {cat.emoji}
-              </div>
-              <div>
-                <h3 className={`font-bold text-sm sm:text-base text-slate-900 group-hover:${cat.textAccent} transition-colors`}>
-                  {cat.name}
-                </h3>
-                <p className="text-[11px] text-slate-500 mt-1 line-clamp-1 hidden sm:block">
-                  {cat.desc}
-                </p>
-              </div>
-            </Link>
-          ))}
+          {CATEGORY_CARDS.map((cat) => {
+            const Icon = cat.icon;
+            return (
+              <Link
+                key={cat.name}
+                href={`/catalogo?categoria=${encodeURIComponent(cat.name)}`}
+                className="p-4 sm:p-5 rounded-2xl bg-slate-50 hover:bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
+              >
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 border ${cat.accent}`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-slate-900 group-hover:text-rose-600 transition-colors">
+                    {cat.name}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">
+                    {cat.desc}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

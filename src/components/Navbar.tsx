@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShoppingBag, MessageCircle, Sparkles, Shield, Search, Menu, X, Flame, Package, Home as HomeIcon } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Shield, Search, Menu, X, Package, Home as HomeIcon, Sparkles } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { getWhatsAppNumber, getStoreName } from '@/lib/whatsapp';
 
@@ -20,43 +20,41 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleWhatsAppGeneral = () => {
-    const text = encodeURIComponent(`¡Hola ${storeName}! 👋 Tengo una consulta sobre los juguetes del catálogo.`);
+    const text = encodeURIComponent(`¡Hola ${storeName}! Tengo una consulta sobre los productos de la tienda.`);
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   };
 
   const navLinks = [
     { label: 'Inicio', href: '/', icon: HomeIcon },
-    { label: 'Catálogo Completo', href: '/catalogo', icon: Package },
-    { label: 'Destacados', href: '/#destacados', icon: Flame },
+    { label: 'Catálogo', href: '/catalogo', icon: Package },
+    { label: 'Destacados', href: '/#destacados', icon: Sparkles },
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs transition-all">
-      {/* Top promotional bar */}
-      <div className="bg-linear-to-r from-rose-500 via-amber-500 to-indigo-600 text-white text-xs font-semibold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2">
-        <Sparkles className="w-3.5 h-3.5 animate-pulse hidden sm:inline" />
-        <span>⚡ Envíos rápidos y seguros • ¡Haz tu pedido directo a nuestro WhatsApp!</span>
-        <Sparkles className="w-3.5 h-3.5 animate-pulse hidden sm:inline" />
+    <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-2xs">
+      {/* Clean top notice bar */}
+      <div className="bg-slate-900 text-white text-xs font-semibold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+        <span>Envíos rápidos a domicilio • Pedidos directos por WhatsApp</span>
       </div>
 
       <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-linear-to-tr from-amber-400 via-rose-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-rose-200 group-hover:scale-105 transition-transform duration-200">
-            <span className="text-2xl">🧸</span>
+          <div className="w-10 h-10 rounded-xl bg-rose-500 flex items-center justify-center text-white shadow-xs group-hover:bg-rose-600 transition-colors">
+            <span className="text-xl">🧸</span>
           </div>
           <div>
-            <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1.5">
-              {storeName.split(' ')[0]} <span className="text-rose-500 font-extrabold">{storeName.split(' ').slice(1).join(' ') || 'Toys'}</span>
+            <span className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1">
+              {storeName.split(' ')[0]} <span className="text-rose-600 font-extrabold">{storeName.split(' ').slice(1).join(' ') || 'Toys'}</span>
             </span>
-            <p className="text-[10px] sm:text-xs text-slate-400 font-medium hidden sm:block">
-              Juguetes mágicos para todas las edades ✨
+            <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
+              Tienda de juguetes y regalos
             </p>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 bg-slate-100/80 p-1 rounded-2xl border border-slate-200">
+        <nav className="hidden lg:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
           {navLinks.map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -64,10 +62,10 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
                   isActive
-                    ? 'bg-white text-rose-600 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-white text-rose-600 shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -83,19 +81,19 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Buscar juguetes en vivo..."
+              placeholder="Buscar juguetes..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-slate-100/80 hover:bg-slate-50 focus:bg-white rounded-full border border-slate-200 focus:border-rose-400 outline-hidden transition-all text-slate-800 placeholder-slate-400"
+              className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-slate-100 hover:bg-slate-50 focus:bg-white rounded-xl border border-slate-200 focus:border-rose-500 outline-hidden transition-colors text-slate-800 placeholder-slate-400"
             />
           </div>
         ) : (
           <div className="hidden md:flex">
             <Link
               href="/catalogo"
-              className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-500 hover:text-rose-600 bg-slate-100 hover:bg-rose-50 rounded-full border border-slate-200 transition-colors"
+              className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 rounded-xl border border-slate-200 transition-colors"
             >
-              <Search className="w-3.5 h-3.5 text-slate-400" />
+              <Search className="w-3.5 h-3.5 text-slate-500" />
               <span>Explorar catálogo...</span>
             </Link>
           </div>
@@ -115,7 +113,7 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           <button
             onClick={handleWhatsAppGeneral}
             title="Escribir por WhatsApp"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all hover:scale-102 cursor-pointer shadow-2xs"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
             <span>WhatsApp</span>
@@ -124,12 +122,12 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           {/* Cart Button */}
           <button
             onClick={openCart}
-            className="relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-linear-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-rose-200 hover:shadow-lg transition-all hover:scale-102 cursor-pointer"
+            className="relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
           >
             <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
             <span className="hidden sm:inline">Mi Pedido</span>
             {totalItems > 0 && (
-              <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-extrabold text-rose-600 bg-white rounded-full shadow-xs animate-bounce">
+              <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-extrabold text-rose-600 bg-white rounded-full shadow-2xs">
                 {totalItems}
               </span>
             )}
@@ -153,10 +151,10 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Buscar juguetes en vivo..."
+              placeholder="Buscar juguetes..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 focus:bg-white rounded-full border border-slate-200 focus:border-rose-400 outline-hidden transition-all text-slate-800"
+              className="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 focus:bg-white rounded-xl border border-slate-200 focus:border-rose-500 outline-hidden transition-colors text-slate-800"
             />
           </div>
         </div>
@@ -164,7 +162,7 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-2 shadow-lg animate-in slide-in-from-top-2">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-2 shadow-md animate-in slide-in-from-top-1">
           {navLinks.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -173,7 +171,7 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   isActive ? 'bg-rose-50 text-rose-600' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
