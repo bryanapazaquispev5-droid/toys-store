@@ -32,7 +32,7 @@ export function HeroBanner() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Glassy Card with Headline & Action */}
-          <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 text-center lg:text-left space-y-5 2xl:space-y-7 bg-white/85 backdrop-blur-md p-6 sm:p-8 2xl:p-10 rounded-3xl border border-white/90 shadow-xl">
+          <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 text-center lg:text-left space-y-5 2xl:space-y-7 bg-white/55 backdrop-blur-md p-6 sm:p-8 2xl:p-10 rounded-3xl border border-white/70 shadow-lg">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-200 border border-pink-300 text-pink-900 text-xs font-bold shadow-2xs">
               <span>Juguetería Mágica - Colección 2026</span>
             </div>
@@ -92,19 +92,11 @@ export function HeroBanner() {
                 className="w-full h-full object-cover rounded-xl"
               />
 
-              {/* Pastel stickers */}
+              {/* Pastel sticker */}
               <div className="absolute top-4 left-4 bg-pink-100 px-3 py-1.5 rounded-xl shadow-md border border-pink-300 flex items-center gap-2">
                 <div>
                   <p className="text-[10px] text-pink-800 font-black uppercase">Favoritos</p>
                   <p className="text-xs font-bold text-pink-950">Todas las Edades</p>
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 right-4 bg-sky-100 px-3 py-1.5 rounded-xl shadow-md border border-sky-300 flex items-center gap-2">
-                <Truck className="w-4 h-4 text-sky-700" />
-                <div>
-                  <p className="text-xs font-bold text-sky-950">Envíos a Domicilio</p>
-                  <p className="text-[10px] text-sky-800 font-bold">Rápido y Seguro</p>
                 </div>
               </div>
             </div>

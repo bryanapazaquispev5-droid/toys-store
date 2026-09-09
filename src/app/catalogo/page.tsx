@@ -160,7 +160,7 @@ function CatalogContent() {
         </div>
 
         <div className="relative z-10 w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div className="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/90 shadow-xl max-w-3xl lg:max-w-4xl">
+          <div className="bg-white/55 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/70 shadow-lg max-w-3xl lg:max-w-4xl">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-200/90 text-sky-950 font-black text-xs mb-2.5 border border-sky-300 shadow-2xs">
                 <span>Catálogo Completo</span>
