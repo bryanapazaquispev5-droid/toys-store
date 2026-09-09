@@ -9,8 +9,18 @@ export function HeroBanner() {
   const phone = getWhatsAppNumber();
 
   return (
-    <section className="bg-pink-50/60 py-10 md:py-16 2xl:py-20 border-b border-pink-200">
-      <div className="w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
+    <section className="relative overflow-hidden py-10 md:py-16 2xl:py-20 border-b border-slate-200">
+      {/* Background Image with Soft Glassy Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/hero-banner.png"
+          alt="Fondo Juguetería Mágica"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/85 to-white/70 backdrop-blur-[1px]" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[2200px] 3xl:max-w-[2500px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Headline & Action */}
