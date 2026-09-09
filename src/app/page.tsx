@@ -11,11 +11,13 @@ import { Product } from '@/types/toy';
 import { fetchProducts } from '@/lib/supabase';
 import { getWhatsAppNumber } from '@/lib/whatsapp';
 import {
-  Sparkles,
+  Flame,
   ArrowRight,
+  Sparkles,
   MessageCircle,
   Gift,
-  Package,
+  PackageCheck,
+  ShoppingBag,
   CheckCircle2
 } from 'lucide-react';
 
@@ -28,7 +30,7 @@ export default function Home() {
     async function loadFeatured() {
       setLoading(true);
       const all = await fetchProducts();
-      // Select top 4 products for a clean, focused display
+      // Pick top 4 products for clean showcase
       const featured = all.filter((p) => p.featured || p.badge).slice(0, 4);
       setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 4));
       setLoading(false);
@@ -43,32 +45,32 @@ export default function Home() {
       {/* Hero Banner */}
       <HeroBanner />
 
-      {/* Categories Showcase */}
+      {/* Category Visual Showcase */}
       <CategoryShowcase />
 
-      {/* Featured Products Section (Clean, max 4 cards) */}
-      <section id="destacados" className="py-14 sm:py-18 bg-slate-50/50 border-b border-slate-200">
+      {/* Featured Top Picks Section (4 Curated Cards with Colorful Accents) */}
+      <section id="destacados" className="py-14 sm:py-20 bg-rose-50/40 border-b border-rose-100">
         <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-1 border border-rose-100">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Destacados</span>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-black mb-2 border border-rose-200">
+                <Flame className="w-4 h-4 text-rose-500 fill-rose-500 animate-bounce" />
+                <span>¡Los Más Pedidos de la Semana!</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                Juguetes Populares
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                Juguetes Estrella & Más Populares
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Una selección de los productos más pedidos esta semana.
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                Una selección especial de los juguetes favoritos por los niños.
               </p>
             </div>
 
             <Link
               href="/catalogo"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-800 font-semibold text-xs sm:text-sm border border-slate-200 transition-colors shadow-2xs group"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs sm:text-sm transition-all hover:scale-103 shadow-md group cursor-pointer"
             >
-              <span>Ver todos los productos</span>
+              <span>Ver Catálogo Completo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -76,11 +78,11 @@ export default function Home() {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs animate-pulse">
-                  <div className="aspect-square bg-slate-200 rounded-xl mb-4" />
-                  <div className="h-4 bg-slate-200 rounded-md w-2/3 mb-2" />
-                  <div className="h-3 bg-slate-100 rounded-md w-full mb-4" />
-                  <div className="h-8 bg-slate-200 rounded-lg" />
+                <div key={i} className="bg-white rounded-3xl p-4 border border-rose-100 shadow-sm animate-pulse">
+                  <div className="aspect-square bg-rose-100/50 rounded-2xl mb-4" />
+                  <div className="h-4 bg-rose-100 rounded-full w-2/3 mb-2" />
+                  <div className="h-3 bg-rose-50 rounded-full w-full mb-4" />
+                  <div className="h-8 bg-rose-100 rounded-xl" />
                 </div>
               ))}
             </div>
@@ -92,90 +94,91 @@ export default function Home() {
             </div>
           )}
 
-          {/* Clean CTA to full catalog */}
-          <div className="mt-10 text-center">
+          {/* Banner Button to explore full catalog */}
+          <div className="mt-12 text-center">
             <Link
               href="/catalogo"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-xs transition-colors"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-3xl bg-linear-to-r from-rose-500 via-amber-500 to-indigo-600 hover:from-rose-600 hover:to-indigo-700 text-white font-black text-sm sm:text-base shadow-xl shadow-rose-200 hover:shadow-2xl transition-all hover:scale-103 cursor-pointer"
             >
-              <Package className="w-4 h-4" />
-              <span>Explorar Catálogo Completo con Búsqueda en Vivo</span>
-              <ArrowRight className="w-4 h-4" />
+              <PackageCheck className="w-5 h-5" />
+              <span>Explorar Todos los Juguetes con Búsqueda en Vivo</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* WhatsApp Consultation Banner - Solid clean colors */}
-      <section className="py-12 bg-emerald-600 text-white border-b border-emerald-700">
-        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center lg:text-left max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500 text-white text-xs font-medium">
-                <Gift className="w-3.5 h-3.5" />
-                <span>Asesoría personalizada</span>
+      {/* WhatsApp Personal Shopper Banner (Vibrant Emerald & Teal) */}
+      <section className="py-14 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-600 text-white relative overflow-hidden shadow-inner">
+        <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 text-center lg:text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/25 backdrop-blur-xs text-white text-xs font-black shadow-xs">
+                <Gift className="w-4 h-4 text-amber-300" />
+                <span>¿Buscas un regalo para cumpleaños o fecha especial?</span>
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight">
-                ¿Buscas un regalo y necesitas recomendaciones?
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-snug">
+                ¡Te asesoramos en tiempo real con fotos y videos por WhatsApp!
               </h3>
-              <p className="text-xs sm:text-sm text-emerald-100">
-                Escríbenos por WhatsApp indicando la edad y tu presupuesto para enviarte fotos y opciones disponibles en el momento.
+              <p className="text-xs sm:text-sm text-emerald-100 font-medium">
+                Dinos la edad del niño o niña y tu presupuesto, y te enviaremos opciones ideales disponibles en stock de inmediato.
               </p>
             </div>
 
             <a
-              href={`https://wa.me/${phone}?text=${encodeURIComponent('¡Hola! Quisiera asesoría para elegir un juguete según la edad.')}`}
+              href={`https://wa.me/${phone}?text=${encodeURIComponent('¡Hola! 👋 Quisiera que me asesoren para elegir un regalo según la edad.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-white hover:bg-emerald-50 text-emerald-900 font-bold text-sm shadow-xs transition-colors flex items-center gap-2 shrink-0"
+              className="px-8 py-4 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-800 font-black text-sm sm:text-base shadow-2xl transition-all hover:scale-104 flex items-center gap-3 shrink-0 cursor-pointer"
             >
-              <MessageCircle className="w-5 h-5 fill-emerald-600 text-emerald-600" />
-              <span>Escribir por WhatsApp</span>
+              <MessageCircle className="w-6 h-6 fill-emerald-600 text-emerald-600" />
+              <span>Escribir al WhatsApp</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Simple 3-step guide */}
-      <section className="py-14 bg-white border-b border-slate-200">
+      {/* 3 Simple Steps with Colorful Number Badges */}
+      <section className="py-16 bg-white border-b border-slate-100">
         <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-md mx-auto mb-8">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              ¿Cómo realizar tu pedido?
+          <div className="max-w-xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-black text-xs mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>Fácil, Rápido y Seguro</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              ¿Cómo comprar tus juguetes favoritos?
             </h2>
-            <p className="text-xs text-slate-500 mt-1">
-              Comprar en nuestra tienda es fácil, rápido y seguro.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 font-bold text-sm flex items-center justify-center mb-3">
+            <div className="p-6 rounded-3xl bg-amber-50/70 border-2 border-amber-200 transition-all hover:shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-amber-400 text-white font-black text-xl flex items-center justify-center mb-4 shadow-md shadow-amber-200">
                 1
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Elige tus productos</h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Revisa el catálogo y agrega al carrito los juguetes que deseas pedir.
+              <h4 className="font-black text-slate-900 text-base">Elige tus juguetes</h4>
+              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
+                Explora el catálogo, filtra por edades y agrega tus productos favoritos a tu carrito de compras.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 font-bold text-sm flex items-center justify-center mb-3">
+            <div className="p-6 rounded-3xl bg-rose-50/70 border-2 border-rose-200 transition-all hover:shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-rose-500 text-white font-black text-xl flex items-center justify-center mb-4 shadow-md shadow-rose-200">
                 2
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Envía tu pedido a WhatsApp</h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                El sistema redacta el detalle de tu compra automáticamente con precios y dirección.
+              <h4 className="font-black text-slate-900 text-base">Envía tu pedido a WhatsApp</h4>
+              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
+                Con un solo clic se redacta el detalle exacto de tu pedido con precios y datos de entrega.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 font-bold text-sm flex items-center justify-center mb-3">
+            <div className="p-6 rounded-3xl bg-indigo-50/70 border-2 border-indigo-200 transition-all hover:shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-500 text-white font-black text-xl flex items-center justify-center mb-4 shadow-md shadow-indigo-200">
                 3
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Paga y recibe tu entrega</h4>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Realiza el pago por Yape, Plin o Transferencia y enviamos tu paquete a domicilio.
+              <h4 className="font-black text-slate-900 text-base">Paga con Yape/Plin y Recibe</h4>
+              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
+                Paga fácil con Yape, Plin o Transferencia bancaria y enviamos tu paquete con delivery seguro.
               </p>
             </div>
           </div>
