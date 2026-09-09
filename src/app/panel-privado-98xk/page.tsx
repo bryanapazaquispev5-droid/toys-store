@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Product, CATEGORIES, AGE_RANGES } from '@/types/toy';
 import { CustomSelect } from '@/components/CustomSelect';
+import { CloudflareTurnstile } from '@/components/CloudflareTurnstile';
 import { fetchProducts, saveProduct, removeProduct, uploadToyImage } from '@/lib/supabase';
 import { getCurrency } from '@/lib/whatsapp';
 import {
@@ -27,6 +28,9 @@ export default function PrivateAdminPage() {
   const [pinInput, setPinInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [pinError, setPinError] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutTime, setLockoutTime] = useState(0);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,8 +66,24 @@ export default function PrivateAdminPage() {
     }
   }, []);
 
+  // Lockout countdown timer
+  useEffect(() => {
+    if (lockoutTime <= 0) return;
+    const interval = setInterval(() => {
+      setLockoutTime((prev) => Math.max(0, prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [lockoutTime]);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    if (lockoutTime > 0) return;
+
+    if (!turnstileToken) {
+      setPinError(true);
+      return;
+    }
+
     const entered = pinInput.trim();
 
     // STRICT CHECK: ONLY the exact master password
@@ -71,9 +91,16 @@ export default function PrivateAdminPage() {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_session_token_v2', MASTER_ADMIN_PASSWORD);
       setPinError(false);
+      setFailedAttempts(0);
     } else {
+      const newAttempts = failedAttempts + 1;
+      setFailedAttempts(newAttempts);
       setIsAuthenticated(false);
       setPinError(true);
+
+      if (newAttempts >= 5) {
+        setLockoutTime(60); // 60s temporary lockout after 5 failed attempts
+      }
     }
   };
 
@@ -243,18 +270,34 @@ export default function PrivateAdminPage() {
               </button>
             </div>
 
-            {pinError && (
-              <p className="text-xs text-rose-500 font-medium">
-                Contraseña incorrecta. Intenta nuevamente.
-              </p>
-            )}
+            {lockoutTime > 0 ? (
+              <div className="p-3 bg-amber-50 border border-amber-300 rounded-2xl text-xs font-bold text-amber-900">
+                ⚠️ Demasiados intentos fallidos. Acceso bloqueado por seguridad durante <span className="text-rose-600">{lockoutTime}s</span>.
+              </div>
+            ) : (
+              <>
+                <CloudflareTurnstile
+                  onVerify={(token) => {
+                    setTurnstileToken(token);
+                  }}
+                  className="my-1"
+                />
 
-            <button
-              type="submit"
-              className="w-full py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md shadow-indigo-200 transition-all cursor-pointer hover:scale-102"
-            >
-              Ingresar al Panel
-            </button>
+                {pinError && (
+                  <p className="text-xs text-rose-500 font-medium">
+                    Contraseña incorrecta. Intenta nuevamente.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={!turnstileToken}
+                  className="w-full py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md shadow-indigo-200 transition-all cursor-pointer hover:scale-102 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  {turnstileToken ? 'Ingresar al Panel' : 'Verificando seguridad...'}
+                </button>
+              </>
+            )}
           </form>
 
           <div className="mt-6 pt-4 border-t border-slate-100">
