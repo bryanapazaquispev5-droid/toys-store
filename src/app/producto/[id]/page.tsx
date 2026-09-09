@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Product } from '@/types/toy';
-import { fetchProductById, fetchProducts } from '@/lib/supabase';
+import { fetchProductById } from '@/lib/supabase';
 import { generateSingleProductWhatsAppUrl, getCurrency, getStoreName, getWhatsAppNumber } from '@/lib/whatsapp';
 import { useCart } from '@/context/CartContext';
 import {
@@ -17,8 +17,7 @@ import {
   AlertCircle,
   Truck,
   ShieldCheck,
-  Sparkles,
-  Heart
+  Sparkles
 } from 'lucide-react';
 
 export default function ProductDetailPage() {
@@ -64,14 +63,14 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
         <main className="max-w-6xl mx-auto px-4 py-16 flex-1 w-full animate-pulse">
-          <div className="h-6 w-36 bg-slate-100 rounded-md mb-8" />
+          <div className="h-6 w-36 bg-sky-100 rounded-md mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="aspect-square bg-slate-100 rounded-lg" />
+            <div className="aspect-square bg-sky-50 rounded-lg border-2 border-sky-100" />
             <div className="space-y-4">
-              <div className="h-4 w-24 bg-slate-100 rounded" />
+              <div className="h-4 w-24 bg-pink-100 rounded" />
               <div className="h-8 w-3/4 bg-slate-100 rounded" />
-              <div className="h-6 w-32 bg-slate-100 rounded" />
-              <div className="h-24 bg-slate-100 rounded" />
+              <div className="h-6 w-32 bg-amber-100 rounded" />
+              <div className="h-24 bg-sky-50 rounded" />
             </div>
           </div>
         </main>
@@ -85,17 +84,19 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
         <main className="max-w-xl mx-auto px-4 py-20 text-center flex-1">
-          <h2 className="text-2xl font-bold text-slate-800">Juguete no encontrado</h2>
-          <p className="text-sm text-slate-500 mt-2 mb-6">
-            El producto que buscas ya no está disponible o el enlace no es correcto.
-          </p>
-          <Link
-            href="/catalogo"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-600 transition-colors shadow-xs"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Volver al Catálogo</span>
-          </Link>
+          <div className="bg-sky-50 p-8 rounded-lg border-2 border-sky-200">
+            <h2 className="text-2xl font-black text-slate-800">Juguete no encontrado</h2>
+            <p className="text-sm text-slate-600 mt-2 mb-6">
+              El producto que buscas ya no está disponible o el enlace no es correcto.
+            </p>
+            <Link
+              href="/catalogo"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-600 transition-colors shadow-xs cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Volver al Catálogo</span>
+            </Link>
+          </div>
         </main>
         <Footer />
       </div>
@@ -115,7 +116,7 @@ export default function ProductDetailPage() {
         <div className="mb-6">
           <Link
             href="/catalogo"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-pink-600 transition-colors px-3 py-1.5 rounded-full bg-slate-100 hover:bg-pink-50"
+            className="inline-flex items-center gap-2 text-xs font-black text-sky-900 hover:text-sky-950 transition-colors px-4 py-2 rounded-full bg-sky-100 hover:bg-sky-200 border border-sky-300"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Volver al Catálogo</span>
@@ -124,9 +125,9 @@ export default function ProductDetailPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
           
-          {/* Product Image Box */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 sm:p-4 relative">
-            <div className="aspect-square w-full rounded-md overflow-hidden bg-white">
+          {/* Product Image Box in Soft Pastel Frame */}
+          <div className="bg-pink-50/70 border-2 border-pink-200 rounded-lg p-3 sm:p-4 relative">
+            <div className="aspect-square w-full rounded-md overflow-hidden bg-white border border-pink-100">
               <img
                 src={product.image_url}
                 alt={product.name}
@@ -141,37 +142,37 @@ export default function ProductDetailPage() {
                   <AlertCircle className="w-3.5 h-3.5 text-rose-400" /> Agotado
                 </span>
               ) : product.badge ? (
-                <span className="px-3 py-1 rounded-md text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                <span className="px-3 py-1 rounded-md text-xs font-black bg-amber-200 text-amber-950 border border-amber-400 shadow-2xs">
                   {product.badge}
                 </span>
               ) : null}
 
               {discountPercent && product.in_stock && (
-                <span className="px-2 py-0.5 rounded-md text-xs font-bold bg-pink-100 text-pink-700 border border-pink-300">
+                <span className="px-2 py-0.5 rounded-md text-xs font-black bg-pink-200 text-pink-900 border border-pink-400">
                   -{discountPercent}% DCTO
                 </span>
               )}
             </div>
           </div>
 
-          {/* Product Info & Purchase Options */}
-          <div className="space-y-6">
+          {/* Product Info Box in Soft Pastel Card */}
+          <div className="bg-sky-50/60 p-6 rounded-lg border-2 border-sky-200 space-y-6">
             
             <div>
-              {/* Category and age pills in soft pastels */}
-              <div className="flex items-center gap-2 flex-wrap mb-2.5">
-                <span className="text-xs font-bold text-pink-800 bg-pink-100 border border-pink-200 px-3 py-1 rounded-md">
+              {/* Category and age pills in solid pastels */}
+              <div className="flex items-center gap-2 flex-wrap mb-3">
+                <span className="text-xs font-bold text-pink-900 bg-pink-200 border border-pink-300 px-3 py-1 rounded-md">
                   {product.category}
                 </span>
-                <span className="text-xs font-bold text-sky-800 bg-sky-100 border border-sky-200 px-3 py-1 rounded-md">
+                <span className="text-xs font-bold text-sky-900 bg-sky-200 border border-sky-300 px-3 py-1 rounded-md">
                   Edad: {product.age_range}
                 </span>
                 {product.in_stock ? (
-                  <span className="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-200 px-3 py-1 rounded-md flex items-center gap-1">
+                  <span className="text-xs font-bold text-emerald-950 bg-emerald-200 border border-emerald-300 px-3 py-1 rounded-md flex items-center gap-1">
                     <Check className="w-3.5 h-3.5" /> En Stock
                   </span>
                 ) : (
-                  <span className="text-xs font-bold text-slate-600 bg-slate-200 px-3 py-1 rounded-md">
+                  <span className="text-xs font-bold text-slate-700 bg-slate-200 px-3 py-1 rounded-md">
                     Sin Stock
                   </span>
                 )}
@@ -187,40 +188,40 @@ export default function ProductDetailPage() {
                   {currency} {product.price.toFixed(2)}
                 </span>
                 {product.original_price && product.original_price > product.price && (
-                  <span className="text-base text-slate-400 line-through">
+                  <span className="text-base text-slate-400 line-through font-semibold">
                     {currency} {product.original_price.toFixed(2)}
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Description */}
-            <div className="border-t border-slate-100 pt-4">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-                Descripción
+            {/* Description box */}
+            <div className="bg-white/80 p-4 rounded-md border border-sky-100">
+              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                Descripción del Juguete
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed font-medium">
                 {product.description}
               </p>
             </div>
 
             {/* Quantity Selector */}
             {product.in_stock && (
-              <div className="flex items-center gap-4 pt-2">
-                <span className="text-xs font-bold text-slate-700">Cantidad:</span>
-                <div className="flex items-center border border-slate-300 rounded-full bg-slate-50 p-1">
+              <div className="flex items-center gap-4 pt-1">
+                <span className="text-xs font-black text-slate-800">Cantidad:</span>
+                <div className="flex items-center border border-slate-300 rounded-full bg-white p-1">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-8 h-8 rounded-full bg-white text-slate-700 hover:bg-slate-200 flex items-center justify-center font-bold text-sm shadow-2xs cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 flex items-center justify-center font-bold text-sm shadow-2xs cursor-pointer"
                   >
                     -
                   </button>
-                  <span className="w-10 text-center text-sm font-bold text-slate-900">
+                  <span className="w-10 text-center text-sm font-black text-slate-900">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 rounded-full bg-white text-slate-700 hover:bg-slate-200 flex items-center justify-center font-bold text-sm shadow-2xs cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 flex items-center justify-center font-bold text-sm shadow-2xs cursor-pointer"
                   >
                     +
                   </button>
@@ -229,7 +230,7 @@ export default function ProductDetailPage() {
             )}
 
             {/* Action Buttons: WhatsApp & Cart (Rounded for buttons) */}
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-1">
               <button
                 onClick={handleWhatsAppBuy}
                 className="w-full py-3.5 px-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-xs transition-colors flex items-center justify-center gap-2.5 cursor-pointer"
@@ -244,7 +245,7 @@ export default function ProductDetailPage() {
                 className={`w-full py-3 px-6 rounded-full font-bold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer ${
                   product.in_stock
                     ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                    : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                 }`}
               >
                 <ShoppingBag className="w-4 h-4" />
@@ -253,20 +254,20 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Pastel assurance blocks */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-100">
-              <div className="p-3 rounded-lg bg-sky-50 border border-sky-200 flex items-center gap-3">
-                <Truck className="w-5 h-5 text-sky-600 shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="p-3 rounded-lg bg-sky-100 border border-sky-300 flex items-center gap-3">
+                <Truck className="w-5 h-5 text-sky-700 shrink-0" />
                 <div>
-                  <h5 className="text-xs font-bold text-sky-950">Envíos Rápidos</h5>
-                  <p className="text-[11px] text-sky-800">Coordinación directa a tu domicilio</p>
+                  <h5 className="text-xs font-black text-sky-950">Envíos Rápidos</h5>
+                  <p className="text-[11px] text-sky-800">Coordinación directa a tu casa</p>
                 </div>
               </div>
 
-              <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center gap-3">
-                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div className="p-3 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center gap-3">
+                <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
                 <div>
-                  <h5 className="text-xs font-bold text-emerald-950">Pagos Seguros</h5>
-                  <p className="text-[11px] text-emerald-800">Aceptamos Yape, Plin y Transferencia</p>
+                  <h5 className="text-xs font-black text-emerald-950">Pagos Seguros</h5>
+                  <p className="text-[11px] text-emerald-800">Aceptamos Yape, Plin y BCP</p>
                 </div>
               </div>
             </div>

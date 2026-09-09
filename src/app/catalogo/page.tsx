@@ -121,32 +121,32 @@ function CatalogContent() {
     <div className="flex-1 flex flex-col min-h-screen bg-white">
       <Navbar searchTerm={search} onSearchChange={setSearch} />
 
-      {/* Header section in soft pastel sky */}
-      <div className="bg-sky-50/70 border-b border-sky-100 py-8">
+      {/* Header section in rich pastel sky */}
+      <div className="bg-sky-100/90 border-b border-sky-200 py-8">
         <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-900 font-bold text-xs mb-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-200 text-sky-950 font-black text-xs mb-2 border border-sky-300">
                 <Sparkles className="w-3.5 h-3.5 text-sky-700" />
                 <span>Catálogo Completo</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-black text-sky-950 tracking-tight">
                 Catálogo de Juguetes
               </h1>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-sky-800 mt-1 font-medium">
                 Filtra por categorías o edades y haz clic en cualquier juguete para ver sus fotos y detalles.
               </p>
             </div>
 
             {/* Live Search Input Box */}
             <div className="w-full md:w-80 lg:w-96 relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-500" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-600" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar por nombre, tipo o edad..."
-                className="w-full pl-10 pr-9 py-2.5 text-xs font-semibold bg-white focus:bg-white rounded-full border-2 border-sky-200 focus:border-sky-500 outline-hidden transition-colors text-slate-900 placeholder-slate-400 shadow-2xs"
+                className="w-full pl-10 pr-9 py-2.5 text-xs font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-colors text-slate-900 placeholder-sky-400 shadow-2xs"
               />
               {search && (
                 <button
@@ -170,7 +170,7 @@ function CatalogContent() {
                   className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                     isSelected
                       ? 'bg-sky-600 text-white shadow-xs'
-                      : 'bg-white hover:bg-sky-100/70 text-slate-700 border border-slate-200'
+                      : 'bg-white hover:bg-sky-200/80 text-sky-950 border border-sky-200'
                   }`}
                 >
                   {cat}
@@ -181,20 +181,20 @@ function CatalogContent() {
         </div>
       </div>
 
-      {/* Control Bar: Filters, Sort and View Mode */}
+      {/* Control Bar: Filters in rich pastel amber */}
       <main className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-amber-100/70 p-3.5 rounded-lg border-2 border-amber-300 shadow-2xs">
           
           <div className="flex items-center gap-3 flex-wrap">
             {/* Age Filter */}
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-600 flex items-center gap-1">
-                <Filter className="w-3.5 h-3.5 text-slate-400" /> Edad:
+              <span className="text-xs font-black text-amber-950 flex items-center gap-1">
+                <Filter className="w-3.5 h-3.5 text-amber-700" /> Edad:
               </span>
               <select
                 value={selectedAge}
                 onChange={(e) => setSelectedAge(e.target.value)}
-                className="text-xs font-semibold bg-white border border-slate-300 rounded-md px-2.5 py-1.5 text-slate-800 outline-hidden focus:border-sky-500 transition-colors cursor-pointer"
+                className="text-xs font-bold bg-white border border-amber-300 rounded-md px-2.5 py-1.5 text-amber-950 outline-hidden focus:border-amber-500 transition-colors cursor-pointer"
               >
                 {AGE_RANGES.map((age) => (
                   <option key={age} value={age}>
@@ -205,12 +205,12 @@ function CatalogContent() {
             </div>
 
             {/* In stock toggle */}
-            <label className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3 py-1.5 rounded-md cursor-pointer hover:bg-slate-50 transition-colors">
+            <label className="flex items-center gap-2 text-xs font-black text-amber-950 bg-white border border-amber-300 px-3 py-1.5 rounded-md cursor-pointer hover:bg-amber-50 transition-colors">
               <input
                 type="checkbox"
                 checked={onlyInStock}
                 onChange={(e) => setOnlyInStock(e.target.checked)}
-                className="w-3.5 h-3.5 text-sky-600 rounded-md focus:ring-sky-400"
+                className="w-3.5 h-3.5 text-amber-600 rounded-md focus:ring-amber-400"
               />
               <span>Solo en Stock</span>
             </label>
@@ -218,7 +218,7 @@ function CatalogContent() {
             {activeFiltersCount > 0 && (
               <button
                 onClick={resetAllFilters}
-                className="text-xs font-bold text-pink-600 hover:text-pink-700 underline px-1 py-1"
+                className="text-xs font-black text-rose-600 hover:text-rose-700 underline px-1 py-1"
               >
                 Limpiar ({activeFiltersCount})
               </button>
@@ -228,13 +228,13 @@ function CatalogContent() {
           <div className="flex items-center gap-2 justify-between sm:justify-end">
             {/* Sorting */}
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-600 flex items-center gap-1">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" /> Ordenar:
+              <span className="text-xs font-black text-amber-950 flex items-center gap-1">
+                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-700" /> Ordenar:
               </span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="text-xs font-semibold bg-white border border-slate-300 rounded-md px-2.5 py-1.5 text-slate-800 outline-hidden focus:border-sky-500 transition-colors cursor-pointer"
+                className="text-xs font-bold bg-white border border-amber-300 rounded-md px-2.5 py-1.5 text-amber-950 outline-hidden focus:border-amber-500 transition-colors cursor-pointer"
               >
                 <option value="featured">Destacados</option>
                 <option value="price-asc">Precio: Menor a Mayor</option>
@@ -244,12 +244,12 @@ function CatalogContent() {
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center bg-white p-0.5 rounded-md border border-slate-200">
+            <div className="flex items-center bg-white p-0.5 rounded-md border border-amber-300">
               <button
                 onClick={() => setViewMode('grid')}
                 title="Vista Cuadrícula"
                 className={`p-1.5 rounded-sm transition-colors cursor-pointer ${
-                  viewMode === 'grid' ? 'bg-sky-600 text-white' : 'text-slate-500 hover:text-slate-800'
+                  viewMode === 'grid' ? 'bg-amber-400 text-amber-950 font-bold' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
@@ -258,7 +258,7 @@ function CatalogContent() {
                 onClick={() => setViewMode('list')}
                 title="Vista Lista"
                 className={`p-1.5 rounded-sm transition-colors cursor-pointer ${
-                  viewMode === 'list' ? 'bg-sky-600 text-white' : 'text-slate-500 hover:text-slate-800'
+                  viewMode === 'list' ? 'bg-amber-400 text-amber-950 font-bold' : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <ListIcon className="w-3.5 h-3.5" />
@@ -269,17 +269,17 @@ function CatalogContent() {
             <button
               onClick={loadData}
               title="Actualizar catálogo"
-              className="p-1.5 bg-white hover:bg-slate-100 text-slate-600 rounded-md border border-slate-200 transition-colors cursor-pointer"
+              className="p-1.5 bg-white hover:bg-amber-50 text-amber-950 rounded-md border border-amber-300 transition-colors cursor-pointer"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-sky-600' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-amber-700' : ''}`} />
             </button>
           </div>
         </div>
 
         {/* Results Counter */}
         <div className="mt-4 mb-5 flex items-center justify-between">
-          <p className="text-xs sm:text-sm text-slate-600 font-medium">
-            Mostrando <span className="text-slate-900 font-bold">{filteredProducts.length}</span> juguetes encontrados
+          <p className="text-xs sm:text-sm text-slate-700 font-bold">
+            Mostrando <span className="text-sky-700 font-black">{filteredProducts.length}</span> juguetes encontrados
             {search && <span> para &ldquo;{search}&rdquo;</span>}
           </p>
         </div>
@@ -288,18 +288,18 @@ function CatalogContent() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs animate-pulse">
-                <div className="aspect-square bg-slate-100 rounded-md mb-3" />
-                <div className="h-4 bg-slate-100 rounded w-2/3 mb-2" />
-                <div className="h-3 bg-slate-50 rounded w-full mb-3" />
-                <div className="h-8 bg-slate-100 rounded-full" />
+              <div key={i} className="bg-slate-50 rounded-lg p-4 border border-slate-200 shadow-2xs animate-pulse">
+                <div className="aspect-square bg-slate-200 rounded-md mb-3" />
+                <div className="h-4 bg-slate-200 rounded w-2/3 mb-2" />
+                <div className="h-3 bg-slate-100 rounded w-full mb-3" />
+                <div className="h-8 bg-slate-200 rounded-full" />
               </div>
             ))}
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="bg-sky-50 rounded-lg p-10 text-center border border-sky-200 max-w-md mx-auto my-10">
-            <h3 className="text-base font-bold text-slate-900">No encontramos juguetes</h3>
-            <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
+          <div className="bg-sky-50 rounded-lg p-10 text-center border-2 border-sky-200 max-w-md mx-auto my-10">
+            <h3 className="text-base font-bold text-sky-950">No encontramos juguetes</h3>
+            <p className="text-xs text-sky-800 mt-1 max-w-xs mx-auto">
               No hay productos con los filtros seleccionados o la búsqueda realizada.
             </p>
             <button
@@ -335,9 +335,9 @@ function CatalogContent() {
                 <Link
                   key={product.id}
                   href={`/producto/${product.id}`}
-                  className="bg-white p-4 rounded-lg border border-slate-200 hover:border-slate-300 shadow-2xs hover:shadow-xs transition-all flex flex-col sm:flex-row items-center gap-4 cursor-pointer group"
+                  className="bg-slate-50 hover:bg-pink-50/40 p-4 rounded-lg border-2 border-slate-200 hover:border-pink-300 shadow-2xs hover:shadow-xs transition-all flex flex-col sm:flex-row items-center gap-4 cursor-pointer group"
                 >
-                  <div className="w-full sm:w-36 aspect-square rounded-md overflow-hidden bg-slate-50 shrink-0 border border-slate-100">
+                  <div className="w-full sm:w-36 aspect-square rounded-md overflow-hidden bg-white shrink-0 border border-slate-200">
                     <img
                       src={product.image_url}
                       alt={product.name}
@@ -347,18 +347,18 @@ function CatalogContent() {
 
                   <div className="flex-1 w-full space-y-1.5">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] font-bold text-pink-800 bg-pink-100 border border-pink-200 px-2.5 py-0.5 rounded-md">
+                      <span className="text-[11px] font-bold text-pink-900 bg-pink-200 border border-pink-300 px-2.5 py-0.5 rounded-md">
                         {product.category}
                       </span>
-                      <span className="text-[11px] font-bold text-sky-800 bg-sky-100 border border-sky-200 px-2.5 py-0.5 rounded-md">
+                      <span className="text-[11px] font-bold text-sky-900 bg-sky-200 border border-sky-300 px-2.5 py-0.5 rounded-md">
                         {product.age_range}
                       </span>
                       {!product.in_stock ? (
-                        <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md flex items-center gap-1">
+                        <span className="text-[10px] font-bold text-rose-600 bg-rose-100 px-2 py-0.5 rounded-md flex items-center gap-1 border border-rose-200">
                           <AlertCircle className="w-3 h-3" /> Agotado
                         </span>
                       ) : product.badge ? (
-                        <span className="text-[10px] font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-md border border-amber-200">
+                        <span className="text-[10px] font-black text-amber-950 bg-amber-200 px-2.5 py-0.5 rounded-md border border-amber-300">
                           {product.badge}
                         </span>
                       ) : null}
@@ -368,7 +368,7 @@ function CatalogContent() {
                       {product.name}
                     </h3>
 
-                    <p className="text-xs text-slate-500 line-clamp-2">
+                    <p className="text-xs text-slate-600 line-clamp-2">
                       {product.description}
                     </p>
 
@@ -398,8 +398,8 @@ function CatalogContent() {
                       disabled={!product.in_stock}
                       className={`w-full py-2 px-3 rounded-full font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         product.in_stock
-                          ? 'bg-pink-100 hover:bg-pink-200 text-pink-800 border border-pink-200'
-                          : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                          ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-2xs'
+                          : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                       }`}
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />

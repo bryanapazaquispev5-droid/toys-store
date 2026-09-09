@@ -25,13 +25,13 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <header className="sticky top-0 z-50 bg-sky-100 border-b border-sky-200 shadow-xs">
       <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 sm:gap-6">
         
         {/* Left: Brand & Nav Links */}
         <div className="flex items-center gap-6 sm:gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-lg font-black tracking-tight text-slate-900">
+            <span className="text-lg font-black tracking-tight text-sky-950">
               {storeName}
             </span>
           </Link>
@@ -42,8 +42,8 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
               href="/"
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-colors ${
                 pathname === '/'
-                  ? 'bg-sky-100 text-sky-800'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-sky-600 text-white shadow-xs'
+                  : 'text-sky-900 hover:bg-sky-200/80'
               }`}
             >
               Inicio
@@ -52,8 +52,8 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
               href="/catalogo"
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-colors ${
                 pathname === '/catalogo'
-                  ? 'bg-sky-100 text-sky-800'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-sky-600 text-white shadow-xs'
+                  : 'text-sky-900 hover:bg-sky-200/80'
               }`}
             >
               Catálogo
@@ -61,25 +61,25 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           </nav>
         </div>
 
-        {/* Center: Search input if in catalog, or quick link */}
+        {/* Center: Search input */}
         {onSearchChange ? (
           <div className="hidden lg:flex flex-1 max-w-xs relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-sky-600" />
             <input
               type="text"
               placeholder="Buscar juguetes..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs font-medium bg-slate-50 focus:bg-white rounded-full border border-slate-200 focus:border-sky-400 outline-hidden transition-all text-slate-900 placeholder-slate-400"
+              className="w-full pl-9 pr-3 py-1.5 text-xs font-semibold bg-white rounded-full border-2 border-sky-300 focus:border-sky-600 outline-hidden transition-all text-slate-900 placeholder-sky-400"
             />
           </div>
         ) : (
           <div className="hidden lg:flex">
             <Link
               href="/catalogo"
-              className="text-xs font-medium text-slate-500 hover:text-slate-800 flex items-center gap-2 transition-colors py-1.5 px-4 rounded-full bg-slate-100 hover:bg-slate-200/60"
+              className="text-xs font-bold text-sky-900 hover:text-sky-950 flex items-center gap-2 transition-colors py-1.5 px-4 rounded-full bg-sky-200/80 hover:bg-sky-200"
             >
-              <Search className="w-3.5 h-3.5 text-slate-400" />
+              <Search className="w-3.5 h-3.5 text-sky-700" />
               <span>Buscar en el catálogo...</span>
             </Link>
           </div>
@@ -90,9 +90,9 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           {/* WhatsApp Direct */}
           <button
             onClick={handleWhatsAppGeneral}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-900 bg-emerald-200 hover:bg-emerald-300 border border-emerald-300 transition-colors cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+            <MessageCircle className="w-4 h-4 text-emerald-700 fill-emerald-700" />
             <span>WhatsApp</span>
           </button>
 
@@ -100,20 +100,20 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           <Link
             href="/admin"
             title="Administración"
-            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors"
+            className="p-1.5 text-sky-700 hover:text-sky-950 rounded-full hover:bg-sky-200 transition-colors"
           >
             <Shield className="w-4 h-4" />
           </Link>
 
-          {/* Cart Trigger Button */}
+          {/* Cart Trigger Button in Pastel Pink */}
           <button
             onClick={openCart}
-            className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
+            className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
           >
             <ShoppingBag className="w-4 h-4" />
             <span className="hidden sm:inline">Mi Pedido</span>
             {totalItems > 0 && (
-              <span className="inline-flex items-center justify-center min-w-[18px] h-4 px-1 text-[10px] font-bold text-sky-800 bg-white rounded-full">
+              <span className="inline-flex items-center justify-center min-w-[18px] h-4 px-1 text-[10px] font-bold text-pink-700 bg-pink-100 rounded-full">
                 {totalItems}
               </span>
             )}
@@ -122,10 +122,10 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 text-slate-700 hover:text-slate-900 rounded-full hover:bg-slate-100"
+            className="md:hidden p-1.5 text-sky-900 hover:text-sky-950 rounded-full hover:bg-sky-200"
             aria-label="Menú"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-slate-800" /> : <Menu className="w-5 h-5 text-slate-700" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-sky-900" /> : <Menu className="w-5 h-5 text-sky-900" />}
           </button>
         </div>
       </div>
@@ -134,13 +134,13 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
       {onSearchChange && (
         <div className="lg:hidden px-4 pb-3">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-600" />
             <input
               type="text"
               placeholder="Buscar en el catálogo..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 focus:bg-white rounded-full border border-slate-200 outline-hidden text-slate-900"
+              className="w-full pl-9 pr-3 py-2 text-xs bg-white rounded-full border-2 border-sky-300 outline-hidden text-slate-900"
             />
           </div>
         </div>
@@ -148,13 +148,13 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 shadow-sm animate-in slide-in-from-top-1">
-          <nav className="flex flex-col space-y-2 text-sm font-bold text-slate-800">
+        <div className="md:hidden bg-sky-50 border-b border-sky-200 px-6 py-4 space-y-3 shadow-sm animate-in slide-in-from-top-1">
+          <nav className="flex flex-col space-y-2 text-sm font-bold text-sky-950">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
               className={`p-2 rounded-lg transition-colors ${
-                pathname === '/' ? 'bg-sky-50 text-sky-700' : 'hover:bg-slate-50'
+                pathname === '/' ? 'bg-sky-200 text-sky-900' : 'hover:bg-sky-100'
               }`}
             >
               Inicio
@@ -163,29 +163,29 @@ export function Navbar({ searchTerm = '', onSearchChange }: NavbarProps) {
               href="/catalogo"
               onClick={() => setMobileMenuOpen(false)}
               className={`p-2 rounded-lg transition-colors ${
-                pathname === '/catalogo' ? 'bg-sky-50 text-sky-700' : 'hover:bg-slate-50'
+                pathname === '/catalogo' ? 'bg-sky-200 text-sky-900' : 'hover:bg-sky-100'
               }`}
             >
               Catálogo
             </Link>
           </nav>
 
-          <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-2 border-t border-sky-200 flex flex-col gap-2">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 handleWhatsAppGeneral();
               }}
-              className="w-full py-2.5 px-4 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold flex items-center justify-center gap-2 border border-emerald-200"
+              className="w-full py-2.5 px-4 rounded-full bg-emerald-200 text-emerald-950 text-xs font-bold flex items-center justify-center gap-2 border border-emerald-300"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+              <MessageCircle className="w-4 h-4 text-emerald-700 fill-emerald-700" />
               <span>WhatsApp de la Tienda</span>
             </button>
 
             <Link
               href="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-2 px-4 rounded-full text-slate-500 text-xs text-center bg-slate-50 hover:bg-slate-100 font-semibold"
+              className="w-full py-2 px-4 rounded-full text-sky-800 text-xs text-center bg-sky-200/80 hover:bg-sky-200 font-semibold"
             >
               Panel de Administración
             </Link>
